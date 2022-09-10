@@ -4,7 +4,8 @@ variables:
 build_windows:
   stage: build
   script:
-    - $msbuild ".\WarHammerV2.sln /t:Rebuild /p:Configuration=Release /p:Platform="x64" /m"
+    - echo "Release build..."
+    - '"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet ".\WarHammerV2.sln"'
   tags:
     - shared-windows
     - windows
