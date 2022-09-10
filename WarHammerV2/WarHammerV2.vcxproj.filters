@@ -130,26 +130,20 @@
     <ClCompile Include="..\ImGui\imgui_draw.cpp">
       <Filter>sources\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="..\backends\imgui_impl_glfw.cpp">
-      <Filter>sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\backends\imgui_impl_opengl2.cpp">
-      <Filter>sources\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\ImGui\imgui_tables.cpp">
       <Filter>sources\imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\ImGui\imgui_widgets.cpp">
       <Filter>sources\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="..\ImGui\backends\imgui_impl_glfw.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGui\backends\imgui_impl_opengl2.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\backends\imgui_impl_glfw.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\backends\imgui_impl_opengl2.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="..\Character\Character.h">
       <Filter>Fichiers d%27en-tête\Character</Filter>
     </ClInclude>
@@ -183,15 +177,6 @@
     <ClInclude Include="..\GameObject\GameGod.h">
       <Filter>Fichiers d%27en-tête\GameGod</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ImGui\imconfig.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ImGui\imgui.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ImGui\imgui_internal.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="..\Tool\TurnInformation.h">
       <Filter>Fichiers d%27en-tête\Tool</Filter>
     </ClInclude>
@@ -209,6 +194,21 @@
     </ClInclude>
     <ClInclude Include="..\GameObject\ModernGameGod.h">
       <Filter>Fichiers d%27en-tête\GameGod</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImGui\backends\imgui_impl_glfw.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImGui\backends\imgui_impl_opengl2.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImGui\imconfig.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImGui\imgui_internal.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImGui\imgui.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
