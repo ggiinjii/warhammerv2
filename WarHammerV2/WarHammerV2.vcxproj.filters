@@ -115,9 +115,6 @@
     <ClCompile Include="..\Tool\Image.cpp">
       <Filter>sources\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\Ui\\ModernUi.cpp">
-      <Filter>sources\Ui\Modern Ui</Filter>
-    </ClCompile>
     <ClCompile Include="..\Ui\RetroUi.cpp">
       <Filter>sources\Ui\Old Ui</Filter>
     </ClCompile>
@@ -141,6 +138,9 @@
     </ClCompile>
     <ClCompile Include="..\ImGui\backends\imgui_impl_opengl2.cpp">
       <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Ui\ModernUi.cpp">
+      <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

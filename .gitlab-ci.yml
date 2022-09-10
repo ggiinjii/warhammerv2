@@ -4,7 +4,7 @@ variables:
 build_windows:
   stage: build
   script:
-    - '& "$msbuild WarHammerV2.sln"  -help'
+    - msbuild C:\Users\auber\Documents\GitHub\warhammerv2\WarHammerV2.sln /t:Rebuild /p:Configuration=Release /p:Platform="x64" /m
   tags:
     - shared-windows
     - windows
