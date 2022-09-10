@@ -1,56 +1,109 @@
-# This file is a template, and might need editing before it works on your project.
-# This is a sample GitLab CI/CD configuration file that should run without any modifications.
-# It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
-# it uses echo commands to simulate the pipeline execution.
-#
-# A pipeline is composed of independent jobs that run scripts, grouped into stages.
-# Stages run in sequential order, but jobs within stages run in parallel.
-#
-# For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
-#
-# You can copy and paste this template into a new `.gitlab-ci.yml` file.
-# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
-#
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
+# Fichier pour l'intégration continue des projets C++
 
-before_script:
-  - apk update && apk add openssh
-  - ./docker_install.sh > /dev/null
+# Image Docker à utiliser cppimage2
+# cppimage2 contient build-essential, conan, ninja, gcovr
 
+image: cppimage2
 
-stages:          # List of stages for jobs, and their order of execution
+#pour l'inclusion des sous modules Git
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  
+stages:
   - build
-  - test
-  - deploy
+  # - test
+  # - coverage
+  - documentation
+#  - check
 
-build-job:       # This job runs in the build stage, which runs first.
+#Job de compilation
+job:build:
+#  only:
+#    - master
+#    - tags
   stage: build
+  #Si il y a des actions à lancer avant le script
+  before_script:
+
   script:
-    - echo "Compiling the code..."
-    - 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe WarHammerV2.sln /t:Rebuild /p:Configuration=Release /p:Platform="x64" /verbosity="diag"'  
+    #execution de cmake
+    - mkdir build && cd build
+    - conan install -s build_type=Debug -if conan-dependencies ..
+    - cmake -GNinja ..
+    - ninja
+ #Décommenter la ligne ci-dessous pour avoir le rapport de tests complet   
+ #   - ctest test/testProjet --no-compress-output --output-on-failure --output-junit Test.xml
+  #création de l'archive contenant le build téléchargeable
+  artifacts:
+  #  when: always
+    paths:
+      - build
+
+# #Job pour les tests unitaires   
+# job:test:
+  # stage: test
+  # script:
+    # - cd build/test/bin
+    # - ./testProjet --reporter junit --out catch_results.xml
+  # artifacts:
+    # when: always
+    # paths:
+    # - build/test/bin/catch_results.xml
+    # reports:
+      # junit: build/test/bin/catch_results.xml
+          
+# Job pour le coverage de l'application    
+# run tests:
+  # stage: coverage
+  # before_script:
+
+  # script:
+    # - cd build
+    # - conan install -s build_type=Debug -if conan-dependencies ..
+    # - cmake -GNinja ..
+    # - ninja
+    # - ninja coverage
+    # - gcovr --xml-pretty --exclude-unreachable-branches --exclude CMakeFiles --print-summary -o coverage.xml --root ${CI_PROJECT_DIR}
+  # coverage: /^\s*lines:\s*\d+.\d+\%/
+  # artifacts:
+    # name: ${CI_JOB_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}
+    # expire_in: 2 days
+    # reports:
+      # cobertura: build/coverage.xml
+    # paths:
+     # - build/coverage
+
+job:documentation:
+#Décommenter les lignes ci-dessous pour ne générer la documentation que pour les commits sur master et/ou les tags  
+#  only:
+#    - master
+#    - tags
+  stage: documentation
+  before_script:
+  script:
+     - doxygen Doxyfile
+     - mv html/ public/
   artifacts:
     paths:
-      - mybinary
-      # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
-      # cache:
-      #   paths:
-      #     - "*.o"
+      - public
 
 
-unit-test-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
-  script:
-    - echo "Running unit tests...."
-    - ./runmytests.sh
+##Job de check du code - inactif pour l'instant
+#job:cpp-check:
+#  stage: check
+#  before_script:
+#    - apt update && apt -y install cppcheck python3-pip
+#    - python3 -m pip install -U cppcheck_codequality
+  #lancement de cppcheck unitaires et génération du rapport json
+#  script:
+#    - mkdir -p $CI_COMMIT_REF_NAME
+#    - cppcheck -j 4 --enable=all --inconclusive --force --xml --xml-version=2 . 2> cppcheck-result.xml
+#    - cppcheck-htmlreport --file=cppcheck-result.xml --report-dir=$CI_COMMIT_REF_NAME --source-dir=.
+#    - cppcheck-codequality --input-file=cppcheck-result.xml --output-file=cppcheck.json
+#  artifacts:
+#    paths: 
+#      - $CI_COMMIT_REF_NAME
+#    reports:
+#      codequality: cppcheck.json
 
-
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
-  script:
-    - echo "TO BE DONE !!!!"
-    #- echo "Deploying application..."
-    #- echo "Application successfully deployed."
+        
