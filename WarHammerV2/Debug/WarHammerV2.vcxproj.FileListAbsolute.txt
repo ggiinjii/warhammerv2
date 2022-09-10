@@ -1,2 +1,2 @@
 C:\Users\auber\Downloads\WarHammerV2\WarHammerV2\Debug\WarHammerV2.exe
-C:\Users\auber\Documents\GitHub\WarHammerV2\WarHammerV2\Debug\WarHammerV2.exe
+C:\Users\auber\Documents\GitHub\warhammerv2\WarHammerV2\Debug\WarHammerV2.exe

@@ -76,12 +76,6 @@
     <ClCompile Include="main.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\backends\imgui_impl_opengl2.cpp">
-      <Filter>sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\backends\imgui_impl_glfw.cpp">
-      <Filter>sources\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\Character\Horde\Orc.cpp">
       <Filter>sources\Character\Class</Filter>
     </ClCompile>
@@ -91,20 +85,8 @@
     <ClCompile Include="..\Character\Character.cpp">
       <Filter>sources\Character</Filter>
     </ClCompile>
-    <ClCompile Include="ModernUi.cpp">
-      <Filter>sources\Ui\Modern Ui</Filter>
-    </ClCompile>
-    <ClCompile Include="ModernGameGod.cpp">
-      <Filter>sources\GameGod</Filter>
-    </ClCompile>
     <ClCompile Include="..\GameObject\GameGod.cpp">
       <Filter>sources\GameGod</Filter>
-    </ClCompile>
-    <ClCompile Include="Pv.cpp">
-      <Filter>sources\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="TurnInformation.cpp">
-      <Filter>sources\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\Inventory\Armor\Armor.cpp">
       <Filter>sources\Inventory\Armor</Filter>
@@ -124,23 +106,41 @@
     <ClCompile Include="..\Inventory\Weapon\SubWeapon\Hammer.cpp">
       <Filter>sources\Inventory\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="Image.cpp">
+    <ClCompile Include="..\Tool\TurnInformation.cpp">
       <Filter>sources\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ImGui\imgui_widgets.cpp">
-      <Filter>sources\imgui</Filter>
+    <ClCompile Include="..\Tool\Pv.cpp">
+      <Filter>sources\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ImGui\imgui.cpp">
-      <Filter>sources\imgui</Filter>
+    <ClCompile Include="..\Tool\Image.cpp">
+      <Filter>sources\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ImGui\imgui_draw.cpp">
-      <Filter>sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ImGui\imgui_tables.cpp">
-      <Filter>sources\imgui</Filter>
+    <ClCompile Include="..\Ui\\ModernUi.cpp">
+      <Filter>sources\Ui\Modern Ui</Filter>
     </ClCompile>
     <ClCompile Include="..\Ui\RetroUi.cpp">
-      <Filter>sources\Ui</Filter>
+      <Filter>sources\Ui\Old Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\ModernGameGod.cpp">
+      <Filter>sources\GameGod</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGui\imgui.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGui\imgui_draw.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\backends\imgui_impl_glfw.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\backends\imgui_impl_opengl2.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGui\imgui_tables.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGui\imgui_widgets.cpp">
+      <Filter>sources\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +158,6 @@
     </ClInclude>
     <ClInclude Include="..\Character\Horde\Orc.h">
       <Filter>Fichiers d%27en-tête\Character\Class</Filter>
-    </ClInclude>
-    <ClInclude Include="ModernUi.h">
-      <Filter>Fichiers d%27en-tête\Ui\Modern Ui</Filter>
     </ClInclude>
     <ClInclude Include="..\Inventory\Armor\Armor.h">
       <Filter>Fichiers d%27en-tête\Inventory</Filter>
@@ -180,26 +177,11 @@
     <ClInclude Include="..\Inventory\Weapon\Weapon.h">
       <Filter>Fichiers d%27en-tête\Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="..\RetroUi.h">
-      <Filter>Fichiers d%27en-tête\Ui\Old Ui</Filter>
-    </ClInclude>
     <ClInclude Include="..\EnhancedHresult.h">
-      <Filter>Fichiers d%27en-tête\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="TurnInformation.h">
-      <Filter>Fichiers d%27en-tête\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="Pv.h">
       <Filter>Fichiers d%27en-tête\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\GameObject\GameGod.h">
       <Filter>Fichiers d%27en-tête\GameGod</Filter>
-    </ClInclude>
-    <ClInclude Include="ModernGameGod.h">
-      <Filter>Fichiers d%27en-tête\GameGod</Filter>
-    </ClInclude>
-    <ClInclude Include="Image.h">
-      <Filter>Fichiers d%27en-tête\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ImGui\imconfig.h">
       <Filter>Fichiers d%27en-tête\imgui</Filter>
@@ -209,6 +191,24 @@
     </ClInclude>
     <ClInclude Include="..\..\ImGui\imgui_internal.h">
       <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Tool\TurnInformation.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Tool\Pv.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Tool\Image.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Ui\ModernUi.h">
+      <Filter>Fichiers d%27en-tête\Ui\Modern Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Ui\RetroUi.h">
+      <Filter>Fichiers d%27en-tête\Ui\Old Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\ModernGameGod.h">
+      <Filter>Fichiers d%27en-tête\GameGod</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
