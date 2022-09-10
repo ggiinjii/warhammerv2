@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{24c7d9c3-e4fc-4e1e-b362-a9094d8edf20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ressourses">
+      <UniqueIdentifier>{40e99911-77f9-40d7-bfa8-223b9952c546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Character">
+      <UniqueIdentifier>{7bf6dbca-4eb6-407b-b9f8-bd287aa9b468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Character\Class">
+      <UniqueIdentifier>{36360dff-ed25-4e6c-880a-a7a8a8a09dcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Character">
+      <UniqueIdentifier>{f1afddcd-8329-487c-a9b6-7ca31d0f0f33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Character\Class">
+      <UniqueIdentifier>{d9ebc171-1d1d-4274-b06a-605dda849a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Ui">
+      <UniqueIdentifier>{c8a567d5-8a08-4644-9909-9f47402df33b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Ui\Old Ui">
+      <UniqueIdentifier>{58f21c0e-d929-4d27-a1d6-305954851364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Ui">
+      <UniqueIdentifier>{cb2e5cc3-fea6-4278-9d2e-5428d3649aef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Ui\Modern Ui">
+      <UniqueIdentifier>{16666567-2c34-47d8-b2b5-81785939b0d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Ui\Old Ui">
+      <UniqueIdentifier>{a8e216f6-af42-4efd-ae59-9f15f94aa61f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Ui\Modern Ui">
+      <UniqueIdentifier>{ddf7796c-bdec-4bc9-99ae-47f851775f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\imgui">
+      <UniqueIdentifier>{c336cfe3-f0c4-464c-9ef0-a9e17a7ff222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\imgui">
+      <UniqueIdentifier>{6986db13-8d98-4307-b1dc-17743070559e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Inventory">
+      <UniqueIdentifier>{ef8a3e2d-55ca-4c7f-8483-277fe6535248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Tool">
+      <UniqueIdentifier>{73ec6aff-be01-4925-bc8b-8ee1b137309e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\GameGod">
+      <UniqueIdentifier>{178649c8-4811-4ddf-b039-0f38262bbe32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Inventory">
+      <UniqueIdentifier>{71bf89f2-8119-4c9a-89e2-6c9e3022b7ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Tool">
+      <UniqueIdentifier>{96592d4f-ea0b-4a2c-b19c-fdb5882442f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\GameGod">
+      <UniqueIdentifier>{f3f4fb51-0278-4f4b-b924-eff5cb4c4a0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Inventory\Armor">
+      <UniqueIdentifier>{18355143-14aa-4e45-bf8b-2f6798f1ca0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\Inventory\Weapon">
+      <UniqueIdentifier>{c0a93cc4-8a86-4020-9c9f-9a8784a039e4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\backends\imgui_impl_opengl2.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\backends\imgui_impl_glfw.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Character\Horde\Orc.cpp">
+      <Filter>sources\Character\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Character\Alliance\Knigth.cpp">
+      <Filter>sources\Character\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Character\Character.cpp">
+      <Filter>sources\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="ModernUi.cpp">
+      <Filter>sources\Ui\Modern Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ModernGameGod.cpp">
+      <Filter>sources\GameGod</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\GameGod.cpp">
+      <Filter>sources\GameGod</Filter>
+    </ClCompile>
+    <ClCompile Include="Pv.cpp">
+      <Filter>sources\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="TurnInformation.cpp">
+      <Filter>sources\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Inventory\Armor\Armor.cpp">
+      <Filter>sources\Inventory\Armor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Inventory\Armor\SubArmor\MirrorArmor.cpp">
+      <Filter>sources\Inventory\Armor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Inventory\Armor\SubArmor\Shield.cpp">
+      <Filter>sources\Inventory\Armor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Inventory\Weapon\Weapon.cpp">
+      <Filter>sources\Inventory\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Inventory\Weapon\SubWeapon\Sword.cpp">
+      <Filter>sources\Inventory\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Inventory\Weapon\SubWeapon\Hammer.cpp">
+      <Filter>sources\Inventory\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>sources\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ImGui\imgui_widgets.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ImGui\imgui.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ImGui\imgui_draw.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ImGui\imgui_tables.cpp">
+      <Filter>sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Ui\RetroUi.cpp">
+      <Filter>sources\Ui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\backends\imgui_impl_glfw.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\backends\imgui_impl_opengl2.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Character\Character.h">
+      <Filter>Fichiers d%27en-tête\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Character\Alliance\Knigth.h">
+      <Filter>Fichiers d%27en-tête\Character\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Character\Horde\Orc.h">
+      <Filter>Fichiers d%27en-tête\Character\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="ModernUi.h">
+      <Filter>Fichiers d%27en-tête\Ui\Modern Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inventory\Armor\Armor.h">
+      <Filter>Fichiers d%27en-tête\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inventory\Weapon\SubWeapon\Hammer.h">
+      <Filter>Fichiers d%27en-tête\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inventory\Armor\SubArmor\MirrorArmor.h">
+      <Filter>Fichiers d%27en-tête\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inventory\Armor\SubArmor\Shield.h">
+      <Filter>Fichiers d%27en-tête\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inventory\Weapon\SubWeapon\Sword.h">
+      <Filter>Fichiers d%27en-tête\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inventory\Weapon\Weapon.h">
+      <Filter>Fichiers d%27en-tête\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RetroUi.h">
+      <Filter>Fichiers d%27en-tête\Ui\Old Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\EnhancedHresult.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnInformation.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Pv.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\GameGod.h">
+      <Filter>Fichiers d%27en-tête\GameGod</Filter>
+    </ClInclude>
+    <ClInclude Include="ModernGameGod.h">
+      <Filter>Fichiers d%27en-tête\GameGod</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ImGui\imconfig.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ImGui\imgui.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ImGui\imgui_internal.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.txt" />
+    <None Include="..\..\misc\debuggers\imgui.natvis">
+      <Filter>Ressourses</Filter>
+    </None>
+  </ItemGroup>
+</Project>
