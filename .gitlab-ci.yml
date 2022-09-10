@@ -4,7 +4,7 @@ variables:
 build_windows:
   stage: build
   script:
-    - 'C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe' .\WarHammerV2.sln /t:Rebuild /p:Configuration=Release /p:Platform="x64" /m
+    - C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe .\WarHammerV2.sln /t:Rebuild /p:Configuration=Release /p:Platform="x64" /m
   tags:
     - shared-windows
     - windows
