@@ -7,7 +7,6 @@
 #include "Tool/Image.h"
 #include <winerror.h>
 #include <list>
-#include <format>
 
 #include "Tool/Pv.h"
 
