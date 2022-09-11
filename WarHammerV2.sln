@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WarHammerV2", "WarHammerV2\WarHammerV2.vcxproj", "{9CDA7840-B7A5-496D-A527-E95571496D18}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WarHammer-UnitTest", "..\war-hammer\WarHammer-UnitTest\WarHammer-UnitTest.vcxproj", "{C44EAEC1-CFE6-44C1-9864-29646FDF3C1A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WarHammer-UnitTest", "WarHammer-UnitTest\WarHammer-UnitTest.vcxproj", "{C44EAEC1-CFE6-44C1-9864-29646FDF3C1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

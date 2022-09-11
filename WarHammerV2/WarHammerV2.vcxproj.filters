@@ -140,7 +140,7 @@
       <Filter>sources\imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\Ui\ModernUi.cpp">
-      <Filter>sources</Filter>
+      <Filter>sources\Ui\Modern Ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -170,9 +170,6 @@
     </ClInclude>
     <ClInclude Include="..\Inventory\Weapon\Weapon.h">
       <Filter>Fichiers d%27en-tête\Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\EnhancedHresult.h">
-      <Filter>Fichiers d%27en-tête\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\GameObject\GameGod.h">
       <Filter>Fichiers d%27en-tête\GameGod</Filter>
@@ -209,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="..\ImGui\imgui.h">
       <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\WarHammerV2\Tool\EnhancedHresult.h">
+      <Filter>Fichiers d%27en-tête\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

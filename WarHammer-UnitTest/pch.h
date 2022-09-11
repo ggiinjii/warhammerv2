@@ -8,6 +8,5 @@
 #define PCH_H
 
 // ajouter les en-têtes à précompiler ici
-#include "../war-hammer/Sword.h"
 
 #endif //PCH_H

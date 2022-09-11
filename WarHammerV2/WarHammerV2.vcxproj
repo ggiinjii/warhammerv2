@@ -180,6 +180,7 @@
     <ClCompile Include="..\Tool\TurnInformation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Downloads\WarHammerV2\Tool\EnhancedHresult.h" />
     <ClInclude Include="..\ImGui\imconfig.h" />
     <ClInclude Include="..\ImGui\imgui.h" />
     <ClInclude Include="..\ImGui\imgui_internal.h" />
@@ -188,7 +189,6 @@
     <ClInclude Include="..\Character\Alliance\Knigth.h" />
     <ClInclude Include="..\Character\Character.h" />
     <ClInclude Include="..\Character\Horde\Orc.h" />
-    <ClInclude Include="..\EnhancedHresult.h" />
     <ClInclude Include="..\GameObject\GameGod.h" />
     <ClInclude Include="..\Inventory\Armor\Armor.h" />
     <ClInclude Include="..\Inventory\Armor\SubArmor\MirrorArmor.h" />
