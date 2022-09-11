@@ -28,6 +28,7 @@ ipch
 
 ## Commonly used CMake directories
 /build*/
+/Log*/
 
 ## Xcode artifacts
 project.xcworkspace

@@ -46,19 +46,8 @@ int main(int, char**)
     GetModuleFileName(NULL, buffer, MAX_PATH);
 
     // Load Character Ressources
-
-   // cout << system("dir ..\\Ressources");
-    try {
-     //   HRESULT isLoadingCorrect = Kimimaro.LoadCharacterRessources("../Ressources/Orc.json");
-        HRESULT isLoadingCorrect = Kimimaro.LoadCharacterRessources("..\\Ressources\\Orc.json");
-    }
-    catch (exception e)
-    {
-      //  PLOG_ERROR << "Parsing of Json Failed. Filename: " << fileName;
-        throw e;
-    }
-  //  HRESULT isLoadingCorrect = Kimimaro.LoadCharacterRessources("..\\Ressources\\Orc.json");
-  //  HRESULT isLoadingCorrect = Kimimaro.LoadCharacterRessources("..\\Ressources\\Orc.json");
+    HRESULT isLoadingCorrect = Kimimaro.LoadCharacterRessources("..\\Ressources\\Orc.json");
+    
     //Stuff Creation
     Shield* SolarShield = new Shield(50);
     Sword* LunarSword = new Sword(5);

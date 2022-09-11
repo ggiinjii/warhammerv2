@@ -62,9 +62,13 @@ public:
 	void resetTurnInfo();
 
 	void RetroPlay(Character* goodGuy, Character* badGuy);
-	void ModernPlay();
 
     std::vector<Character*> GetGoodGuy() { return GoodGuy; };
     std::vector<Character*> GetBadGuy() { return BadGuy; };
+
+    void DisplayNameFighter(vector<Character*> Fighter);
+    void DisplayFighter(Character*  Fighter);
+
+    int SecureCinInput(int maxNumber);
 };
 

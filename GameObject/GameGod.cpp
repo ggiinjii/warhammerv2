@@ -343,16 +343,84 @@ void GameGod::resetTurnInfo()
 void GameGod::RetroPlay(Character * goodGuy, Character* badGuy)
 {
 	/******************CHOIX DE L'ADVERSAIRE************************/
-
+    system("cls");
 	cout << "Welcome to the Arena of Azeroth. Let's the fight between Aliance and horde Begin\n";
 
-	StartRetroBattle(goodGuy, badGuy);
+    cout << "Please Select alliance and horde Fighter!\n"
+        << "Alliance Side: \n";
+    DisplayNameFighter(GoodGuy);
+
+    int inputFighter = -1;
+
+    cout << "\nVotre Choix: ";
+    inputFighter = SecureCinInput(BadGuy.size() - 1);
+
+    cout << endl;
+    Character* AllianceFighter = GoodGuy[inputFighter];
+
+    DisplayFighter(AllianceFighter);
+    system("pause");
+
+    system("cls");
+    cout << "Welcome to the Arena of Azeroth. Let's the fight between Aliance and horde Begin\n";
+    cout << "Horde Side: ";
+    DisplayNameFighter(BadGuy);
+    cout << "\nVotre Choix: ";
+    inputFighter=SecureCinInput(BadGuy.size()-1);
+
+    Character* HordeFighter = BadGuy[inputFighter];
+    DisplayFighter(HordeFighter);
+
+    cout << "Press Enter to Start the Battle";
+    system("pause");
+
+	StartRetroBattle(AllianceFighter, HordeFighter);
 
 	resetTurnInfo();
 	AddTurnInfo("The Game is Over.");
 	AddTurnInfo("The Winner is " + GetWinner()->GetName() );
 
 	_retroUI.displayUI();
+}
+
+void GameGod::DisplayNameFighter(vector<Character*> Fighter)
+{
+    for (int i = 0; i < Fighter.size(); i++)
+    {
+        cout << Fighter[i]->GetName() << " - Entrez " << i << endl;
+    }
+}
+
+void GameGod::DisplayFighter(Character* Fighter)
+{
+    cout << "Fighter Selected: \n"
+        << "Name: " << Fighter->GetName() << endl
+        << "Pv: " << Fighter->GetPv().getPv() << "/" << Fighter->GetPv().getPv() << endl
+        << "Capacity: " << Fighter->GetNameCapacity() << endl;
+    if (Fighter->GetWeapon() != NULL)
+    {
+        cout << "Weapon: " << Fighter->GetWeapon()->GetName() << endl;
+    }
+    if (Fighter->GetArmor() != NULL)
+    {
+        cout << "Armor: " << Fighter->GetArmor()->GetName() << endl;
+    }
+    cout << endl;
+}
+
+int GameGod::SecureCinInput(int maxNumber)
+{
+    int inputFighter;
+    cin >> inputFighter;
+    while (std::cin.fail() || (inputFighter<0 || inputFighter>maxNumber))
+    {
+        std::cout << "\nNumber incorrect ! " << std::endl;
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
+        cout << "Votre Choix: ";
+        std::cin >> inputFighter;
+    }
+    return inputFighter;
 }
 
 
