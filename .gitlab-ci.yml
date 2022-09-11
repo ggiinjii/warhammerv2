@@ -6,7 +6,7 @@ build_windows:
   script:
     - echo "Release build..."
     - echo "$msbuild"
-    - 'C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe' -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\WarHammerV2.sln'
+    - C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\WarHammerV2.sln'
   tags:
     - shared-windows
     - windows
