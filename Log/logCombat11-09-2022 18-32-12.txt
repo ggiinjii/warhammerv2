@@ -1,0 +1,1 @@
+﻿2022-09-11 18:32:12.410 ERROR [8168] [GameGod::LoadCharacterRessources@35] Parsing of Json Failed. Filename: C:\Users\auber\Documents\GitHub\warhammerv2\Ressources\Ressources\Orc.json

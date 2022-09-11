@@ -1,0 +1,8 @@
+﻿2022-09-11 18:20:28.808 DEBUG [28848] [Weapon::setDamage@26] Damage set to:12
+2022-09-11 18:20:28.809 DEBUG [28848] [Armor::setPvBonus@31] PvBonus set to: 12
+2022-09-11 18:20:28.809 DEBUG [28848] [Weapon::setDamage@26] Damage set to:40
+2022-09-11 18:20:28.809 DEBUG [28848] [Armor::setPvBonus@31] PvBonus set to: 60
+2022-09-11 18:20:28.810 DEBUG [28848] [Weapon::setDamage@26] Damage set to:5
+2022-09-11 18:20:28.810 DEBUG [28848] [Armor::setPvBonus@31] PvBonus set to: 100
+2022-09-11 18:20:28.810 DEBUG [28848] [Weapon::setDamage@26] Damage set to:20
+2022-09-11 18:20:28.810 DEBUG [28848] [Armor::setPvBonus@31] PvBonus set to: 0

@@ -224,16 +224,19 @@ void ModernUi::displayModernUi()
         }
         else 
         {
-            if (ImGui::Button("Next Turn"))
+            if (logTurn.getWinner().empty())
             {
-                ResetTurnInfo();
-                modernGameGod.ResetTurnInfo();
+                if (ImGui::Button("Next Turn"))
+                {
+                    ResetTurnInfo();
+                    modernGameGod.ResetTurnInfo();
 
-                logTurn= modernGameGod.NextTurn(_allianceSide[goodguy_currentIndex], _hordeSide[horde_currentIndex]);
-                _allianceSide[goodguy_currentIndex]->SetPv(logTurn.getPvCharacter1());
-                _hordeSide[horde_currentIndex]->SetPv(logTurn.getPvCharacter2());
-                _battleLog = logTurn.getlog();
-                _isGameOver = logTurn.getIsGameOver();
+                    logTurn = modernGameGod.NextTurn(_allianceSide[goodguy_currentIndex], _hordeSide[horde_currentIndex]);
+                    _allianceSide[goodguy_currentIndex]->SetPv(logTurn.getPvCharacter1());
+                    _hordeSide[horde_currentIndex]->SetPv(logTurn.getPvCharacter2());
+                    _battleLog = logTurn.getlog();
+                    _isGameOver = logTurn.getIsGameOver();
+                }
             }
         }
 
@@ -243,7 +246,12 @@ void ModernUi::displayModernUi()
             if (!logTurn.getWinner().empty())
             {
                 _battleLog = "The Game is Over. The Winner is " + logTurn.getWinner();
+                if (ImGui::Button("Quit Game"))
+                {
+                    return;
+                }
             }
+            
            // _isGameStarted = false;
             disable_all = false;
         }
