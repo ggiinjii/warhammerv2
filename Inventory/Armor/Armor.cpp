@@ -38,7 +38,7 @@ int Armor::getDamaged(int damaged)
     _pvBonus = _pvBonus - damaged;
 
     PLOG_DEBUG << "Armor get damaged"
-    <<damaged << " point of damage taken, Pv left "<< PvBonus;
+    <<damaged << " point of damage taken, Pv left "<< _pvBonus;
 
     double PercentDamage = ((double)_pvBonus / _pvMaxBonus) * 100;
 

@@ -34,7 +34,7 @@ public:
 
 	void ResetTurnInfo();
 
-	void SetPvOpponentPv(Pv AllianceFighterPv, Pv HordeFighterPV);
+	void SetOpponentPv(Pv AllianceFighterPv, Pv HordeFighterPV);
 
 	void SetOpponent(string AllianceFighterName, string HordeFighterName);
 

@@ -215,8 +215,8 @@ void ModernUi::displayModernUi()
                 _isGameOver = false;
                 disable_all = true;
 
-                _allianceSide[alliance_currentIndex]->SetPv(logTurn.getPvCharacter1());
-                _hordeSide[horde_currentIndex]->SetPv(logTurn.getPvCharacter2());
+                _allianceSide[alliance_currentIndex]->SetPv(logTurn.getPvAllianceFighter());
+                _hordeSide[horde_currentIndex]->SetPv(logTurn.getPvHordeFighter());
                 _battleLog = logTurn.getlog();
                 _isGameOver = logTurn.getIsGameOver();
 
@@ -232,8 +232,8 @@ void ModernUi::displayModernUi()
                     modernGameGod.ResetTurnInfo();
 
                     logTurn = modernGameGod.NextTurn(_allianceSide[alliance_currentIndex], _hordeSide[horde_currentIndex]);
-                    _allianceSide[alliance_currentIndex]->SetPv(logTurn.getPvCharacter1());
-                    _hordeSide[horde_currentIndex]->SetPv(logTurn.getPvCharacter2());
+                    _allianceSide[alliance_currentIndex]->SetPv(logTurn.getPvAllianceFighter());
+                    _hordeSide[horde_currentIndex]->SetPv(logTurn.getPvHordeFighter());
                     _battleLog = logTurn.getlog();
                     _isGameOver = logTurn.getIsGameOver();
                 }

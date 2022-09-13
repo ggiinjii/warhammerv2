@@ -43,7 +43,7 @@ void RetroUi::displayUI()
 
 }
 
-void RetroUi::SetPvOpponentPv(Pv AllianceFighterPv, Pv HordeFighterPV  )
+void RetroUi::SetOpponentPv(Pv AllianceFighterPv, Pv HordeFighterPV  )
 {
     _hordeFighterPv = HordeFighterPV;
     _allianceFighterPv = AllianceFighterPv;
