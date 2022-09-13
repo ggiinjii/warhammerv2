@@ -104,7 +104,7 @@ void ModernUi::displayModernUi()
     ImGui_ImplOpenGL2_Init();
 
 
-    // variable definition for 
+    // variable definition for
     bool showUi = true;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
     static int goodguy_currentIndex = 0;
@@ -135,8 +135,8 @@ void ModernUi::displayModernUi()
         static bool disable_all = false; // The Checkbox for that is inside the "Disabled" section at the bottom
         if (disable_all)
             ImGui::BeginDisabled();
-       
-        /**********************************Alliance Character Windows****************************************************/ 
+
+        /**********************************Alliance Character Windows****************************************************/
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
         string fighterName = _allianceSide[goodguy_currentIndex]->GetName();
         const char* combo_preview_value = fighterName.c_str();
@@ -205,7 +205,7 @@ void ModernUi::displayModernUi()
             ImGui::EndDisabled();
         }
 
-        /*********Todo décoréller les tours pour les afficher ***********/
+        /*********Todo dï¿½corï¿½ller les tours pour les afficher ***********/
         if (!_isGameStarted)
         {
             if (ImGui::Button("Start Battle"))
@@ -222,7 +222,7 @@ void ModernUi::displayModernUi()
 
             }
         }
-        else 
+        else
         {
             if (logTurn.getWinner().empty())
             {
@@ -251,7 +251,7 @@ void ModernUi::displayModernUi()
                     return;
                 }
             }
-            
+
            // _isGameStarted = false;
             disable_all = false;
         }

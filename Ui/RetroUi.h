@@ -7,18 +7,18 @@
 using namespace std;
 class RetroUi
 {
-private: 
+private:
 	int _turnNumber;
 
 	std::list<string> _turnInformation;
 
-    Pv _pvOrc;
-    Pv _pvKnight;
+    Pv _hordeFighterPv;
+    Pv _allianceFighterPv;
 	string _nameOrc;
 	string _nameKnight;
 
 
-public: 
+public:
 	RetroUi();
 	~RetroUi();
 	void displayUI();

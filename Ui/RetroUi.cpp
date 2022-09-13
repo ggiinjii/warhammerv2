@@ -1,4 +1,4 @@
-﻿#include "RetroUi.h"
+#include "RetroUi.h"
 #include <iostream>
 
 using namespace std;
@@ -37,27 +37,27 @@ void RetroUi::displayUI()
         << "|          \\(                  ||                         |" << endl
         << " --------------------------------------------------------- " << endl
         << "Name: " << _nameOrc << "                       Name: " << _nameKnight << endl
-        << "PV: " << _pvOrc.getPv() << "/" << _pvOrc.getPvMax() << "                              PV: " << _pvKnight.getPv() << "/" << _pvKnight.getPvMax() << endl << endl
+        << "PV: " << _hordeFighterPv.getPv() << "/" << _hordeFighterPv.getPvMax() << "                              PV: " << _allianceFighterPv.getPv() << "/" << _allianceFighterPv.getPvMax() << endl << endl
         << "Battle Log: " << endl;
     DisplayTurnInformation();
 
 }
 
-void RetroUi::SetPvOpponent(Pv goodGuyPv, Pv badGuyPV  )
+void RetroUi::SetPvOpponent(Pv AllianceFighterPv, Pv HordeFighterPV  )
 {
-    _pvOrc = badGuyPV;
-    _pvKnight = goodGuyPv;
+    _hordeFighterPv = HordeFighterPV;
+    _allianceFighterPv = AllianceFighterPv;
 
 }
 
-void RetroUi::SetOpponent(string knightName, string orcName)
+void RetroUi::SetOpponent(string AllianceFighterName, string HordeFighterName)
 {
-    _nameOrc = orcName;
-    _nameKnight = knightName;
+    _hordeFighterPv = HordeFighterName;
+    _allianceFighterPv = AllianceFighter;
 };
 
-std::list<string> RetroUi::getTurnInfo() 
-{ 
+std::list<string> RetroUi::getTurnInfo()
+{
     return _turnInformation;
 }
 
@@ -77,15 +77,15 @@ void RetroUi::AddTurnInfo(string turnInfo)
 }
 
 void RetroUi::SetTurnNumber(int number)
-{ 
+{
     _turnNumber = number;
 }
-int RetroUi::GetTurnNumber() 
+int RetroUi::GetTurnNumber()
 {
-    return _turnNumber; 
+    return _turnNumber;
 }
 
-void RetroUi::ResetTurnInfo() 
-{ 
-    _turnInformation.clear(); 
+void RetroUi::ResetTurnInfo()
+{
+    _turnInformation.clear();
 }

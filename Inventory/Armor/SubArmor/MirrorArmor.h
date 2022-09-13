@@ -4,10 +4,10 @@
 
 class MirrorArmor : public Armor
 {
-private: 
+private:
 	int _nbUse = 2;
 
-public: 
+public:
 	MirrorArmor();
 	~MirrorArmor();
 

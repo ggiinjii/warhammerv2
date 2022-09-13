@@ -28,7 +28,7 @@ int Armor::getPvBonus()
 
 void Armor::setPvBonus(int PvBonus)
 {
-    PLOG_DEBUG << "PvBonus set to: " << PvBonus;
+    PLOG_DEBUG << "Current pv of the armor set to: " << PvBonus;
     _pvBonus = PvBonus;
     _pvMaxBonus = PvBonus;
 }
@@ -36,6 +36,9 @@ void Armor::setPvBonus(int PvBonus)
 int Armor::getDamaged(int damaged)
 {
     _pvBonus = _pvBonus - damaged;
+
+    PLOG_DEBUG << "Armor get damaged"
+    <<damaged << " point of damage taken, Pv left "<< PvBonus;
 
     double PercentDamage = ((double)_pvBonus / _pvMaxBonus) * 100;
 

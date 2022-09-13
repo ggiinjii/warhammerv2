@@ -3,7 +3,7 @@
 
 class Shield: public Armor
 {
-public: 
+public:
 
 	Shield(void);
 	Shield(int myArmor);

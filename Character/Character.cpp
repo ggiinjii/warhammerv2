@@ -60,12 +60,12 @@ HRESULT Character::Attack(Character* Ennemy)
     if (_characterStatus == STUN)
     {
         logFight<<_nameCharacter << " is Stun and can't attack";
-        AddLog(logFight);
+        AddLog(logFight.str());
         return S_FALSE;
     }
 
     logFight<<_nameCharacter << " Attack";
-    AddLog(logFight);
+    AddLog(logFight.str());
 
 
     int damage = 0;
