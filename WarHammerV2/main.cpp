@@ -46,20 +46,8 @@ int main(int, char**)
     GetModuleFileName(NULL, buffer, MAX_PATH);
 
     // Load Character Ressources
-    HRESULT isLoadingCorrect = Kimimaro.LoadCharacterRessources("..\\Ressources\\Orc.json");
-    
-    //Stuff Creation
-    Shield* SolarShield = new Shield(50);
-    Sword* LunarSword = new Sword(5);
-    Hammer* DoomHammer = new Hammer(8);
+    HRESULT isLoadingCorrect = Kimimaro.LoadCharacterRessources("..\\Ressources\\Character.json");
 
-    Image imgVide;
-
-    //Character Creation
-    Knigth* Billy = new Knigth("Billy2", 20, LunarSword, SolarShield, 3, "Charge", imgVide);
-    Orc* Thrall = new Orc("Thrall2", 60, DoomHammer, nullptr, 5, "Stun", imgVide);
-
-    Kimimaro.SetOpponent(Billy, Thrall); // Setup for RetroUi
 
     int displayChoice = 0;
 
@@ -73,7 +61,7 @@ int main(int, char**)
         cin >> displayChoice;
         if (displayChoice == 1)
         {
-            Kimimaro.RetroPlay(Billy, Thrall);
+            Kimimaro.RetroPlay();
             break;
         }
         else if (displayChoice == 2)

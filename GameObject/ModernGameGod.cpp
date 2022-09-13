@@ -10,19 +10,19 @@ ModernGameGod::~ModernGameGod()
 
 }
 
-TurnInformation ModernGameGod::StartModernBattle(Character* goodGuy, Character* badGuy)
+TurnInformation ModernGameGod::StartModernBattle(Character* allianceFighter, Character* hordeFighter)
 {
     _isGameOver = E_FAIL;
     _turnCount = 0;
 
     PLOG_INFO << "The battle Begin";
 
-    TurnInformation logTurn = NextTurn(goodGuy, badGuy);
+    TurnInformation logTurn = NextTurn(allianceFighter, hordeFighter);
     return  logTurn;
 
 }
 
-TurnInformation ModernGameGod::NextTurn(Character* goodGuy, Character* badGuy)
+TurnInformation ModernGameGod::NextTurn(Character* allianceFighter, Character* hordeFighter)
 {
     TurnInformation logTurn;
     _turnCount = _turnCount + 1;
@@ -30,17 +30,17 @@ TurnInformation ModernGameGod::NextTurn(Character* goodGuy, Character* badGuy)
     logTurn.setTurnNumber(_turnCount);
 
     AddTurnInfo("Special Capacity Phase");
-    _isGameOver = LauchSpecialCapacity(goodGuy, badGuy);
+    _isGameOver = LauchSpecialCapacity(allianceFighter, hordeFighter);
 
     if (_isGameOver != S_OK)
     {
         AddTurnInfo("\n\nClassic Combat Phase");
-        _isGameOver = ClassicFight(goodGuy, badGuy);
+        _isGameOver = ClassicFight(allianceFighter, hordeFighter);
 
         if (_isGameOver == S_FALSE)
         {
             AddTurnInfo("\nCheck Condition of both players");
-            CheckStatusEffectForPlayers(goodGuy, badGuy);
+            CheckStatusEffectForPlayers(allianceFighter, hordeFighter);
             logTurn.setIsGameOver(false);
         }
         else {
@@ -50,7 +50,7 @@ TurnInformation ModernGameGod::NextTurn(Character* goodGuy, Character* badGuy)
     }
 
     AddTurnInfo("\nEnd Of Turn\n");
-    logTurn.setPvCharacter(goodGuy->GetPv(), badGuy->GetPv());
+    logTurn.setPvCharacter(allianceFighter->GetPv(), hordeFighter->GetPv());
     logTurn.setTurnLog(_logTurn);
     if (_isGameOver==S_OK && _winner!=NULL)
         logTurn.setWinner(_winner->GetName());
@@ -69,102 +69,102 @@ void ModernGameGod::ResetTurnInfo()
 }
 
 
-HRESULT ModernGameGod::LauchSpecialCapacity(Character* a, Character* b)
+HRESULT ModernGameGod::LauchSpecialCapacity(Character* allianceFighter, Character* hordeFighter)
 {
-    if (a == nullptr || b == nullptr)
+    if (allianceFighter == nullptr || hordeFighter == nullptr)
     {
         AddTurnInfo("Error with Character. Check logfile");
-        PLOG_ERROR << "One of the caracter is Null:" << " - Character A: " << a << " - Character B:" << b;
+        PLOG_ERROR << "One of the caracter is Null:" << " - Character allianceFighter: " << allianceFighter << " - Character hordeFighter:" << hordeFighter;
         return E_FAIL;
     }
 
-    AddTurnInfo("\n"+a->GetName() + " Launch Special Capacity\n");
+    AddTurnInfo("\n"+allianceFighter->GetName() + " Launch Special Capacity\n");
 
-    HRESULT result = a->SpecialCapacityCheck(b);
+    HRESULT result = allianceFighter->SpecialCapacityCheck(hordeFighter);
 
-    std::list<string> characterlog = a->GetLog();
+    std::list<string> characterlog = allianceFighter->GetLog();
 
     for (auto const& i : characterlog) {
         AddTurnInfo(i);
     }
 
 
-    HRESULT isAPlayerDead = isAWinnerDecided(a, b);
+    HRESULT isAPlayerDead = isAWinnerDecided(allianceFighter, hordeFighter);
 
     if (isAPlayerDead == S_FALSE)
     {
-        AddTurnInfo("\n"+b->GetName() + " Launch Special Capacity");
+        AddTurnInfo("\n"+hordeFighter->GetName() + " Launch Special Capacity");
 
-        b->SpecialCapacityCheck(a);
+        hordeFighter->SpecialCapacityCheck(allianceFighter);
 
-        characterlog = b->GetLog();
+        characterlog = hordeFighter->GetLog();
 
         for (auto const& i : characterlog) {
             AddTurnInfo(i);
         }
 
-        isAPlayerDead = isAWinnerDecided(a, b);
+        isAPlayerDead = isAWinnerDecided(allianceFighter, hordeFighter);
     }
 
-    a->ClearLog();
-    b->ClearLog();
+    allianceFighter->ClearLog();
+    hordeFighter->ClearLog();
 
     return isAPlayerDead;
 
 }
 
 
-HRESULT ModernGameGod::isAWinnerDecided(Character* character1, Character* character2)
+HRESULT ModernGameGod::isAWinnerDecided(Character* allianceFighter, Character* hordeFighter)
 {
-    if (!character1->IsCharacterStillAlive())
+    if (!allianceFighter->IsCharacterStillAlive())
     {
-        setWinner(character2);
+        setWinner(hordeFighter);
         return S_OK;
     }
-    else if (!character2->IsCharacterStillAlive())
+    else if (!hordeFighter->IsCharacterStillAlive())
     {
-        setWinner(character1);
+        setWinner(allianceFighter);
         return S_OK;
     }
     else
         return S_FALSE;
 }
 
-HRESULT ModernGameGod::ClassicFight(Character* a, Character* b)
+HRESULT ModernGameGod::ClassicFight(Character* allianceFighter, Character* hordeFighter)
 {
-    AddTurnInfo("\nCharacter " + a->GetName() + " Attack normaly\n");
+    AddTurnInfo("\nCharacter " + allianceFighter->GetName() + " Attack normaly\n");
 
-    a->Attack(b);
+    allianceFighter->Attack(hordeFighter);
 
-    std::list<string> characterlog = a->GetLog();
+    std::list<string> characterlog = allianceFighter->GetLog();
 
     for (auto const& i : characterlog) {
         AddTurnInfo(i);
     }
 
 
-    if (isAWinnerDecided(a, b) == S_FALSE)
+    if (isAWinnerDecided(allianceFighter, hordeFighter) == S_FALSE)
     {
-        AddTurnInfo("\nCharacter " + b->GetName() + " Attack normaly\n");
+        AddTurnInfo("\nCharacter " + hordeFighter->GetName() + " Attack normaly\n");
 
-        b->Attack(a);
+        hordeFighter->Attack(allianceFighter);
 
-        characterlog = b->GetLog();
+        characterlog = hordeFighter->GetLog();
 
         for (auto const& i : characterlog) {
             AddTurnInfo(i);
         }
     }
 
-    a->ClearLog();
-    b->ClearLog();
+    allianceFighter->ClearLog();
+    hordeFighter->ClearLog();
 
-    return isAWinnerDecided(a, b);
+    return isAWinnerDecided(allianceFighter, hordeFighter);
 }
 
 void ModernGameGod::setWinner(Character* winner)
 {
-    PLOG_INFO << "\nWe have a winner ";
+    PLOG_INFO << "\nWe have allianceFighter winner ";
 
     _winner = winner;
 }
@@ -174,21 +174,21 @@ Character* ModernGameGod::GetWinner()
     return _winner;
 }
 
-void ModernGameGod::CheckStatusEffectForPlayers(Character* a, Character* b)
+void ModernGameGod::CheckStatusEffectForPlayers(Character* allianceFighter, Character* hordeFighter)
 {
-    CheckStatusEffect(a);
-    CheckStatusEffect(b);
+    CheckStatusEffect(allianceFighter);
+    CheckStatusEffect(hordeFighter);
 
 }
 
 
-void ModernGameGod::CheckStatusEffect(Character* a)
+void ModernGameGod::CheckStatusEffect(Character* fighter)
 {
-    CONDITION status = a->getCharacterStatus();
+    CONDITION status = fighter->getCharacterStatus();
     switch (status)
     {
-    case STUN: a->setCharacterStatus(NORMAL);
-        AddTurnInfo("\nCharacter " + a->GetName() + " Cured from STUN");
+    case STUN: fighter->setCharacterStatus(NORMAL);
+        AddTurnInfo("\nCharacter " + fighter->GetName() + " Cured from STUN");
         break;
 
     case BURN: //TODO
@@ -196,12 +196,11 @@ void ModernGameGod::CheckStatusEffect(Character* a)
     case FROZEN: //TODO
 
     case NORMAL:
-        AddTurnInfo("\n"+a->GetName() + " status is NORMAL");
+        AddTurnInfo("\n"+ fighter->GetName() + " status is NORMAL");
 
     default:
 
         break;
     }
-
 
 }

@@ -13,19 +13,19 @@ class ModernGameGod
 public :
     ModernGameGod();
     ~ModernGameGod();
-    TurnInformation StartModernBattle(Character* goodGuy, Character* badGuy);
+    TurnInformation StartModernBattle(Character* allianceFighter, Character* hordeFighter);
     
-    TurnInformation NextTurn(Character* goodGuy, Character* badGuy);
+    TurnInformation NextTurn(Character* allianceFighter, Character* hordeFighter);
     void AddTurnInfo(string info);
     void ResetTurnInfo();
-    HRESULT LauchSpecialCapacity(Character* a, Character* b);
-    HRESULT isAWinnerDecided(Character* character1, Character* character2);
-    HRESULT ClassicFight(Character* a, Character* b);
+    HRESULT LauchSpecialCapacity(Character* allianceFighter, Character* hordeFighter);
+    HRESULT isAWinnerDecided(Character* allianceFighter, Character* hordeFighter);
+    HRESULT ClassicFight(Character* allianceFighter, Character* hordeFighter);
     void setWinner(Character* winner);
     Character* GetWinner();
 
-    void CheckStatusEffectForPlayers(Character* a, Character* b);
-    void CheckStatusEffect(Character* a);
+    void CheckStatusEffectForPlayers(Character* allianceFighter, Character* hordeFighter);
+    void CheckStatusEffect(Character* fighter);
 
 };
 

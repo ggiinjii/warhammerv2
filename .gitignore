@@ -12,6 +12,10 @@ examples/build/*
 examples/*/Debug/*
 examples/*/Release/*
 examples/*/x64/*
+WarHammerV2/Debug/*
+WarHammerV2/Release/*
+WarHammer-UnitTest/*
+
 
 ## Visual Studio artifacts
 .vs
@@ -29,6 +33,9 @@ ipch
 ## Commonly used CMake directories
 /build*/
 /Log*/
+
+## Log Result
+Log/*
 
 ## Xcode artifacts
 project.xcworkspace

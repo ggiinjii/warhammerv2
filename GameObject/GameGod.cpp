@@ -12,8 +12,8 @@
 GameGod::GameGod(void)
 {
 	_winner = nullptr;
-	_goodGuy= nullptr;
-	_badGuy= nullptr;
+	_allianceFighter= nullptr;
+	_hordeFighter= nullptr;
     _isGameOver = E_FAIL;
     _turnCount = 0;
 }
@@ -49,8 +49,8 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
 		string name = Characters[i]["Name"];
 		int pv = Characters[i]["pv"];
 		
-		Weapon* CharacterWeapon = new Weapon();;
-		Armor* CharacterArmor = new Armor();;
+		Weapon* CharacterWeapon = new Weapon();
+		Armor* CharacterArmor = new Armor();
 
         /*********************************************SWORD CREATION***********************************************/
         if (!Characters[i]["MyWeapon"].empty())
@@ -128,129 +128,129 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
 		switch (ForceSide)
 		{
 		case 0: 
-            BadGuy.push_back((Knigth*)newCharacter); // Light Side
+            _hordeFighters.push_back((Knigth*)newCharacter); // Light Side
 			break;
 
 		case 1: 
-            GoodGuy.push_back((Orc*)newCharacter); // Dark Side
+            _allianceFighters.push_back((Orc*)newCharacter); // Dark Side
 			break;
 
 		default: 
-			GoodGuy.push_back((Knigth*)newCharacter); // Let's assume that we are all good is 
+			_allianceFighters.push_back((Knigth*)newCharacter); // Let's assume that we are all good is 
 			break;
 		}
 	}
 	return S_OK;
 }
 
-HRESULT GameGod::LauchSpecialCapacity(Character *a, Character *b)
+HRESULT GameGod::LauchSpecialCapacity(Character *allianceFighter, Character *hordeFighter)
 {
-	if (a == nullptr || b == nullptr)
+	if (allianceFighter == nullptr || hordeFighter == nullptr)
 	{
 		AddTurnInfo("Error with Character. Check logfile\n");
-		PLOG_ERROR << "One of the caracter is Null:" <<" - Character A: "<<a<<" - Character B:"<<b;
+		PLOG_ERROR << "One of the caracter is Null:" <<" - Character allianceFighter: "<<allianceFighter<<" - Character hordeFighters:"<<hordeFighter;
 		return E_FAIL;
 	}
 
-	AddTurnInfo(a->GetName() + " Launch Special Capacity");
+	AddTurnInfo(allianceFighter->GetName() + " Launch Special Capacity");
 
-	HRESULT result=a->SpecialCapacityCheck(b);
+	HRESULT result=allianceFighter->SpecialCapacityCheck(hordeFighter);
 
-	std::list<string> characterlog = a->GetLog();
+	std::list<string> characterlog = allianceFighter->GetLog();
 
 	for (auto const& i : characterlog) {
 		AddTurnInfo(i);
 	}
 
 
-	HRESULT isAPlayerDead = isAWinnerDecided(a, b);
+	HRESULT isAPlayerDead = isAWinnerDecided(allianceFighter, hordeFighter);
 
 	if (isAPlayerDead==S_FALSE)
 	{
-		AddTurnInfo( b->GetName() + " Launch Special Capacity");
+		AddTurnInfo( hordeFighter->GetName() + " Launch Special Capacity");
 
-		b->SpecialCapacityCheck(a);
+		hordeFighter->SpecialCapacityCheck(allianceFighter);
 		
-		characterlog = b->GetLog();
+		characterlog = hordeFighter->GetLog();
 
 		for (auto const& i : characterlog) {
 			AddTurnInfo(i);
 		}
 
-		isAPlayerDead = isAWinnerDecided(a, b);
+		isAPlayerDead = isAWinnerDecided(allianceFighter, hordeFighter);
 	}
 
-	a->ClearLog();
-	b->ClearLog();
+	allianceFighter->ClearLog();
+	hordeFighter->ClearLog();
 
 	return isAPlayerDead;
 	
 }
 
 
-HRESULT GameGod::isAWinnerDecided(Character* character1, Character* character2)
+HRESULT GameGod::isAWinnerDecided(Character* allianceFighter, Character* hordeFighter)
 {
-	if (!character1->IsCharacterStillAlive())
+	if (!allianceFighter->IsCharacterStillAlive())
 	{
-		setWinner(character2);
+		setWinner(hordeFighter);
 		return S_OK;
 	}
-	else if (!character2->IsCharacterStillAlive())
+	else if (!hordeFighter->IsCharacterStillAlive())
 	{
-		setWinner(character1);
+		setWinner(allianceFighter);
 		return S_OK;
 	}
 	else
 		return S_FALSE;
 }
 
-HRESULT GameGod::ClassicFight(Character *a, Character *b)
+HRESULT GameGod::ClassicFight(Character *allianceFighter, Character *hordeFighter)
 {
-	AddTurnInfo("Character " + a->GetName() + " Attack normaly");
+	AddTurnInfo("Character " + allianceFighter->GetName() + " Attack normaly");
 
-	a->Attack(b);
+	allianceFighter->Attack(hordeFighter);
 
-	std::list<string> characterlog = a->GetLog();
+	std::list<string> characterlog = allianceFighter->GetLog();
 
 	for (auto const& i : characterlog) {
 		AddTurnInfo(i);
 	}
 
 
-	if (isAWinnerDecided(a, b)==S_FALSE)
+	if (isAWinnerDecided(allianceFighter, hordeFighter)==S_FALSE)
 	{
-		AddTurnInfo("\nCharacter " + b->GetName() + " Attack normaly");
+		AddTurnInfo("\nCharacter " + hordeFighter->GetName() + " Attack normaly");
 
-		b->Attack(a);
+		hordeFighter->Attack(allianceFighter);
 
-		characterlog = b->GetLog();
+		characterlog = hordeFighter->GetLog();
 
 		for (auto const& i : characterlog) {
 			AddTurnInfo(i);
 		}
 	}
 
-	a->ClearLog();
-	b->ClearLog();
+	allianceFighter->ClearLog();
+	hordeFighter->ClearLog();
 
-	return isAWinnerDecided(a, b);
+	return isAWinnerDecided(allianceFighter, hordeFighter);
 }
 
-void GameGod::CheckStatusEffectForPlayers(Character* a, Character* b)
+void GameGod::CheckStatusEffectForPlayers(Character* allianceFighter, Character* hordeFighter)
 {
-	CheckStatusEffect( a);
-	CheckStatusEffect( b);
+	CheckStatusEffect( allianceFighter);
+	CheckStatusEffect( hordeFighter);
 
 }
 
 
-void GameGod::CheckStatusEffect(Character *a )
+void GameGod::CheckStatusEffect(Character *allianceFighter )
 {
-	CONDITION status= a->getCharacterStatus();
+	CONDITION status= allianceFighter->getCharacterStatus();
 	switch (status)
 	{
-		case STUN: a->setCharacterStatus(NORMAL);
-			AddTurnInfo("Character " + a->GetName() + " Cured from STUN");
+		case STUN: allianceFighter->setCharacterStatus(NORMAL);
+			AddTurnInfo("Character " + allianceFighter->GetName() + " Cured from STUN");
 			break;
 
 		case BURN: //TODO
@@ -258,7 +258,7 @@ void GameGod::CheckStatusEffect(Character *a )
 		case FROZEN: //TODO
 
 		case NORMAL: 
-			AddTurnInfo(a->GetName() + " status is NORMAL");
+			AddTurnInfo(allianceFighter->GetName() + " status is NORMAL");
 
 		default: 
 
@@ -268,32 +268,32 @@ void GameGod::CheckStatusEffect(Character *a )
 
 }
 
-void GameGod::StartRetroBattle(Character* goodGuy, Character *badGuy)
+void GameGod::StartRetroBattle(Character* allianceFighter, Character *hordeFighter)
 {
      _isGameOver = E_FAIL;
      _turnCount = 0;
 
-	_retroUI.SetOpponent(goodGuy->GetName(), badGuy->GetName());
+	_retroUI.SetOpponent(allianceFighter->GetName(), hordeFighter->GetName());
 
 	PLOG_INFO << "The battle Begin";
 	while (_isGameOver != S_OK)
 	{
-        _isGameOver = NextTurn(goodGuy, badGuy);
+        _isGameOver = NextTurn(allianceFighter, hordeFighter);
 	}
 }
 
-void GameGod::StartModernBattle(Character* goodGuy, Character* badGuy)
+void GameGod::StartModernBattle(Character* allianceFighter, Character* hordeFighter)
 {
     _isGameOver = E_FAIL;
     _turnCount = 0;
 
     PLOG_INFO << "The battle Begin";
 
-    _isGameOver = NextTurn(goodGuy, badGuy);
+    _isGameOver = NextTurn(allianceFighter, hordeFighter);
 
 }
 
-bool GameGod::NextTurn(Character* goodGuy, Character* badGuy)
+HRESULT GameGod::NextTurn(Character* allianceFighter, Character* hordeFighter)
 {
 
     resetTurnInfo();
@@ -303,17 +303,18 @@ bool GameGod::NextTurn(Character* goodGuy, Character* badGuy)
     _retroUI.SetTurnNumber(_turnCount);
 
     AddTurnInfo("\nSpecial Capacity Phase");
-    _isGameOver = LauchSpecialCapacity(goodGuy, badGuy);
+    _isGameOver = LauchSpecialCapacity(allianceFighter, hordeFighter);
 
     if (_isGameOver != S_OK)
     {
         AddTurnInfo("\nClassic Combat Phase");
-        _isGameOver = ClassicFight(goodGuy, badGuy);
+        _isGameOver = ClassicFight(allianceFighter, hordeFighter);
+
 
         if (_isGameOver == S_FALSE)
         {
             AddTurnInfo("Check Condition of both players");
-            CheckStatusEffectForPlayers(goodGuy, badGuy);
+            CheckStatusEffectForPlayers(allianceFighter, hordeFighter);
         }
         else {
             _isGameOver = S_OK;
@@ -321,10 +322,11 @@ bool GameGod::NextTurn(Character* goodGuy, Character* badGuy)
     }
 
     AddTurnInfo("End Of Turn\n");
-    _retroUI.SetPvOpponent(goodGuy->GetPv(), badGuy->GetPv());
+    _retroUI.SetPvOpponent(allianceFighter->GetPv(), hordeFighter->GetPv());
     _retroUI.displayUI();
 
     system("pause");
+
     return _isGameOver;
 }
 
@@ -340,7 +342,7 @@ void GameGod::resetTurnInfo()
 	_retroUI.ResetTurnInfo();
 }
 
-void GameGod::RetroPlay(Character * goodGuy, Character* badGuy)
+void GameGod::RetroPlay()
 {
 	/******************CHOIX DE L'ADVERSAIRE************************/
     system("cls");
@@ -348,15 +350,15 @@ void GameGod::RetroPlay(Character * goodGuy, Character* badGuy)
 
     cout << "Please Select alliance and horde Fighter!\n"
         << "Alliance Side: \n";
-    DisplayNameFighter(GoodGuy);
+    DisplayNameFighter(_allianceFighters);
 
     int inputFighter = -1;
 
     cout << "\nVotre Choix: ";
-    inputFighter = SecureCinInput(BadGuy.size() - 1);
+    inputFighter = SecureCinInput(_hordeFighters.size() - 1);
 
     cout << endl;
-    Character* AllianceFighter = GoodGuy[inputFighter];
+    Character* AllianceFighter = _allianceFighters[inputFighter];
 
     DisplayFighter(AllianceFighter);
     system("pause");
@@ -364,11 +366,11 @@ void GameGod::RetroPlay(Character * goodGuy, Character* badGuy)
     system("cls");
     cout << "Welcome to the Arena of Azeroth. Let's the fight between Aliance and horde Begin\n";
     cout << "Horde Side: ";
-    DisplayNameFighter(BadGuy);
+    DisplayNameFighter(_hordeFighters);
     cout << "\nVotre Choix: ";
-    inputFighter=SecureCinInput(BadGuy.size()-1);
+    inputFighter=SecureCinInput(_hordeFighters.size()-1);
 
-    Character* HordeFighter = BadGuy[inputFighter];
+    Character* HordeFighter = _hordeFighters[inputFighter];
     DisplayFighter(HordeFighter);
 
     cout << "Press Enter to Start the Battle";
@@ -425,15 +427,15 @@ int GameGod::SecureCinInput(int maxNumber)
 
 
 
-void GameGod::SetOpponent(Character* character1, Character* character2)
+void GameGod::SetOpponent(Character* allianceFighters, Character* hordeFighters)
 {
-	_goodGuy = character1;
-	_badGuy = character2;
+	_allianceFighter = allianceFighters;
+	_hordeFighter = hordeFighters;
 }
 
 void GameGod::setWinner(Character* winner)
 {
-	PLOG_INFO << "We have a winner ";
+	PLOG_INFO << "We have allianceFighter winner ";
 
 	_winner = winner;
 }

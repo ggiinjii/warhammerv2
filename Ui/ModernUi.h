@@ -13,8 +13,7 @@ private:
 
     int _turnNumber;
     std::list<string> _turnInformation;
-    int _pvOrc, _pvMaxOrc;
-    int _pvKnight, _pvMaxKnight;
+
     string _nameOrc;
     string _nameKnight;
     vector<Character*> _allianceSide;
