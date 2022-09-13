@@ -49,8 +49,8 @@ void DisplayFighterProfile(GLuint texture, Character* fighter)
         ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);   // No tint
         ImVec4 border_col = ImVec4(1.0f, 1.0f, 1.0f, 0.5f); // 50% opaque white
         ImGui::Image(my_tex_id, ImVec2(my_tex_w, my_tex_h), uv_min, uv_max, tint_col, border_col);
-        ImGui::Text("PV: %d/%d", fighter->GetPv().getPv(), fighter->GetPv().getPvMax());
-        ImGui::Text("Nom: %s", fighter->GetName().c_str());
+        ImGui::Text("Pv: %d/%d", fighter->GetPv().getPv(), fighter->GetPv().getPvMax());
+        ImGui::Text("Name: %s", fighter->GetName().c_str());
         ImGui::Text("Special Capacity: %s", fighter->GetNameCapacity().c_str());
         if (fighter->GetWeapon() != NULL)
             ImGui::Text("Weapon: %s", fighter->GetWeapon()->GetName().c_str());
