@@ -5,11 +5,11 @@ build_windows:
   stage: build
   script:
     - echo "Release build..."
-    - C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\WarHammerV2.sln'
+    #- C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\WarHammerV2.sln'
     - echo "Unit Test... PASSER PAR Vstest.console.exe MAIS TROUVER Où IL EST"
-    - cd C:"\Program Files (x86)\Microsoft Visual Studio\2019"
+    - cd C:"\Program Files (x86)\Microsoft Visual Studio\"
     - ls
-    - C:"\Program Files (x86)\Microsoft Visual Studio\2019\Common7\IDE\Current\CommonExtensions\Microsoft\Vstest.console.exe" -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\x64\Debug\WarHammer-UnitTest.dll'
+    #- C:"\Program Files (x86)\Microsoft Visual Studio\2019\Common7\IDE\Current\CommonExtensions\Microsoft\Vstest.console.exe" -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\x64\Debug\WarHammer-UnitTest.dll'
   tags:
     - shared-windows
     - windows
