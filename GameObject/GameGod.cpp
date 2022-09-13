@@ -321,7 +321,7 @@ bool GameGod::NextTurn(Character* goodGuy, Character* badGuy)
     }
 
     AddTurnInfo("End Of Turn\n");
-    _retroUI.SetOpponentPV(goodGuy->GetPv(), badGuy->GetPv());
+    _retroUI.SetOpponentPv(goodGuy->GetPv(), badGuy->GetPv());
     _retroUI.displayUI();
 
     system("pause");
