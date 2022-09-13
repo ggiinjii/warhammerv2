@@ -7,7 +7,13 @@ build_windows:
     - echo "Release build..."
     #- C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\WarHammerV2.sln'
     - echo "Unit Test... PASSER PAR Vstest.console.exe MAIS TROUVER Où IL EST"
-    - cd C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft"
+    - cd C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\TestWindow"
+    - ls
+    - cd C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\VC"
+    - ls
+    - cd C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CodeAnalysis"
+    - ls
+      - cd C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\External Tools"
     - ls
     #- C:"\Program Files (x86)\Microsoft Visual Studio\2019\Common7\IDE\Current\CommonExtensions\Microsoft\Vstest.console.exe" -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\x64\Debug\WarHammer-UnitTest.dll'
   tags:
