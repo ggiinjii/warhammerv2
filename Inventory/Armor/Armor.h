@@ -40,6 +40,5 @@ public:
     void SetName(string name) {
         _name = name;
     }
-    
 };
 

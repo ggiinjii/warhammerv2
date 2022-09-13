@@ -7,7 +7,7 @@ Shield::Shield(void)
 
 Shield::Shield(int myArmor): Armor(myArmor)
 {
-	
+
 }
 
 Shield::~Shield(void)

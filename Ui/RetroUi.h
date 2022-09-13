@@ -7,18 +7,18 @@
 using namespace std;
 class RetroUi
 {
-private: 
+private:
 	int _turnNumber;
 
 	std::list<string> _turnInformation;
 
-    Pv _pvOrc;
-    Pv _pvKnight;
-	string _nameOrc;
-	string _nameKnight;
+    Pv _hordeFighterPv;
+    Pv _allianceFighterPv;
+	string _nameHordeFighter;
+	string _nameAllianceFighter;
 
 
-public: 
+public:
 	RetroUi();
 	~RetroUi();
 	void displayUI();
@@ -34,9 +34,9 @@ public:
 
 	void ResetTurnInfo();
 
-	void SetPvOpponent(Pv goodGuyPv, Pv badGuyPV);
+	void SetPvOpponent(Pv AllianceFighterPv, Pv HordeFighterPV);
 
-	void SetOpponent(string knightName, string orcName);
+	void SetOpponent(string AllianceFighterName, string HordeFighterName);
 
 };
 

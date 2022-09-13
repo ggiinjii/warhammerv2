@@ -1,92 +1,139 @@
-# WarHammerV2
+# ReadMe
+
+**Contact:**
+AUBERT ROMAIN -
+aubertromainpro@gmail.com
+
+Bonjour,
+Voici le projet WarHammer que j'ai développé dans le cadre de ma candidature pour l'entreprise Eugen System.
+
+Pour rappel, voici la problématique :
+
+Créer un projet Console sous Visual Studio 2017 ou 2019 qui fera tourner un petit jeu de simulation simple de bataille entre deux unités (chevalier contre orc).
+Vous êtes libre d'utiliser des librairies externes de votre choix si vous estimez en avoir besoin, à condition que le projet que vous allez fournir à la fin puisse
+se lancer sans avoir besoin d'installer un autre logiciel.
+Vous devez nous rendre un fichier zip contenant un repo git local. Celui-ci devra contenir sur la branche master la solution Visual que nous aurons juste
+à compiler et lancer pour tester votre programme.
+Voici une description des règles à respecter. Si certaines règles ne vous semblent pas claires ou qu'il manque de précisions, vous êtes libre de faire des choix
+à condition de nous les préciser dans votre mail de retour.
+
+**Caractéristiques du chevalier**
+- Il dispose de 20 points de vie et d'un bouclier de 50 points.
+- Il dispose d'une épée lui permettant de faire 5 points de dégâts par tour.
+- Il dispose d'une capacité "charge" lui permettant de faire le double de dégâts ce tour-ci. Cette capacité ne peut être utilisée que tous les 3 tours de jeu.
+Elle a 60% de chance de réussir. Si elle ne réussit pas, il faudra attendre les 3 tours mentionnés ci-dessus pour la tenter de nouveau.
+- Les dégâts pris par le chevalier sont d'abord infligés au bouclier et lorsque le bouclier n'a plus de points, l'unité perd des points de vie.
+
+**Caractéristiques de l'orc**
+- L'orc dispose de 60 points de vie mais n'a pas de bouclier.
+- Il dispose d'une hache lui permettant de faire 8 points de dégâts par tour.
+- Il dispose d'une capacité "stun" lui permettant d'étourdir l'ennemi pendant un tour. Un ennemi étourdi ne pourra pas faire de dégât ce tour-ci.
+Cette capacité ne peut être utilisée que tous les 5 tours de jeu. Elle a 20% de chance de réussir.
+Si elle ne réussit pas, il faudra attendre les 5 tours mentionnés ci-dessus pour la tenter de nouveau.
+
+**Déroulement de la partie**
+- Un tour de jeu est constitué de 2 éléments successifs : lancement de capacités spéciales, puis combat entre les unités.
+- Il y a autant de tour de jeu que nécessaire pour que l'un des côtés gagne la partie.
+- Un côté gagne la partie quand l'unité adverse a été tuée.
+- Pour le combat entre 2 unités, chaque unité inflige directement les dégâts à l'unité ennemie (en prenant en compte les éventuels effets des capacités).
 
 
+**Contraintes supplémentaires**
+- Afin de vérifier que votre programme fonctionne normalement, il serait appréciable de pouvoir suivre l'évolution de la partie en affichant notamment les informations
+de chaque unité à chaque tour de jeu.
+- Il faut que le programme soit correctement architecturé pour qu'il soit facile d'ajouter de nouvelles classes et/ou de nouvelles caractéristiques.
 
-## Getting started
+**Bonus**
+- Pour rendre le jeu plus "dynamique", il pourrait être sympa de pouvoir faire des choix avant le lancement de la partie/pendant la partie. Vous êtes libre de faire une/des
+propositions et de les implémenter.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+------------------------------------------------------------------------------------------------------------------------------------------
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Le projet
+J'ai créer un projet console en Visual 2019 permettant a 2 camps identifié comme l'alliance et la Horde de faire s'affronter un champion les représentants dans une arene.
+Crée en C++ et intégrant des librairies externes, il est compilable et exécutable en Debug ou Release.
+Afin que ce dernier soit robuste, j'ai ajouter des tests Unitaires me permettant un développement plus stable. Toutes les fonctions nouvellement ajouté sont testé m'assurant aucune régression lors de mes développements.
+Un systeme de monitoring a également été pensé via SonarScanner mais nécéssite une licence payante, rendant impossible sa mise en place dans un contexte personnel.
 
-## Add your files
+**CI**
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+	Job:  	Build - teste la compilation Release
+      		Test - Lance les Test Unitaires, Echoue si un test Echoue
+      		Package - Crée un package pour l'execution release.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/personnal_stuff/warhammerv2.git
-git branch -M main
-git push -uf origin main
-```
+**Dependance**
 
-## Integrate with your tools
+- SergiusTheBest/plog --> Logger (https://github.com/SergiusTheBest/plog)
+- nlohmann/json --> Parser Json(https://github.com/nlohmann/json)
+- SpartanJ /SOIL2--> Chargement Imagejpg/Png/... dans OpenGL (https://github.com/SpartanJ/SOIL2)
+- ocornut /imgui--> Ui basé sur OpenGl et glfw  (https://github.com/ocornut/imgui)
+- OpenGL 2--> lib 3D
+- glfw /glfw --> Librairie OpenGl (https://github.com/glfw/glfw )
 
-- [ ] [Set up project integrations](https://gitlab.com/personnal_stuff/warhammerv2/-/settings/integrations)
+**Déroulé du combat**
 
-## Collaborate with your team
+Pour suivre le déroulé du combat il existe 3 options:
+- Un logger a été ajouté ( Librairie PLOG ) afin de pouvoir récupérer dans le dossier Logs le déroulé entier d'un combat avec différent niveau de verbosité ( Information, Debug, Erreur).
+Ce fichier peut autant servir au débug qu'a du monitoring.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+- Une UI rétro permet également de voir le déroulé du combat sur la console. Chaque tour est joué d'un coup et les PV des combattant sont mit a jour sous leur encadré
 
-## Test and Deploy
+- Une UI moderne a également été crée afin de pouvoir profité de la puissance d'OpenGl et de GLWF pour un meilleur rendu. Ainsi en plus de panel de texte, des boutons et des images des personnages choisi s'affiche a l'écran.
+Il serait possible avec plus de temps d'ajouter la partie Temps réel a ce combat en modélisant un décors et les personnage, en les animant et en intégrant tout ceci a l'application via OpenGl.
 
-Use the built-in continuous integration in GitLab.
+**Les Combattants**
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Les combattants ont chacune leur classe fille attitré qui est dérivé de la classe mere Character.
+Cela permet l'ajout facilement de nouvelle classe de combattant en créant des classes Heritant de la classe Character.
+Les character possedant une capacité spéciale, il est donc possible de créer des personnages avec des capacités spéciale différente en ajoutant qu'une nouvelle classe.
+Pour le moment, chaque classe possede une capacité spéciale ( Chevalier --> Charge & Orc --> Stun) mais il serai possible de dissocié la capacité spéciale de la classe.
 
-***
+Pour ce faire il faudrait procéder comme les classes Weapon et Armor. Un pointeur dans la classe Character sur la classe mere des Capacité spéciale et une instanciation lors de la lecture Json de la capacité en question.
+Cela necessiterai un ajout a la lecture du Json, une modification de ce dernier et un changement sur les classes fille de la classe Character pour que la fonction LaunchSpecialCapacity ne soit plus hardcodé mais appel les fonctions sur les classes filles des Capacité spéciales.
 
-# Editing this README
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+**Les Armes**
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+L'architecture logicielle des armes est la même que celle des Personnages Combattant.
+Deux classe mere Armor et Weapon sont les classe hérité de toutes les armes que l'ont voudra créer.
+Cela permet également une grande souplesse dans l'ajout d'arme différentes.
 
-## Name
-Choose a self-explaining name for your project.
+**Préparation du combat**
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Avant de lancer le combat j'ai voulu laisser le joueur faire le choix des combattant.
+Chacun des camps ( Alliance et horde ) a plusieurs champions qu'il peut choisir pour le combat.
+Ces champions sont définie dans un Fichier Json dans la partie Ressource.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Ce fichier permet de créer plusieurs personnages et leur équipement avec des statistiques différente de maniere efficiente.
+Cela permet aussi une flexibilité au niveau des affrontement afin que les orcs n'affronte pas toujours les chevaliers car tous comme les bon orc existes, les mauvais chevalier existe aussi.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+La seule limite de ce fichier est que les informations rentrée doivent etre en concordance avec ce que le code permet.
+Impossible de créer un personne d'une classe non Existante dans le code, si c'est le cas, le code créra un personnage par défaut ( un chevalier coté Alliance ) avec les stats et équipement que vous avez pu remplir.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+**Le Combat**
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Le combat fonctionne de la maniere suivante:
+- lancement de capacités spéciales si possible par les personnages
+- combat entre les unités si aucun des personnages n'est mort
+- évolution des conditions liée au personnage (Evolution ou suppréssion des états temporaire )
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Lors du combat l'alliance a l'avantage et lancera toujours ses attaques en premier.
+Avec plus de temps, il serai possible d'imaginer une stats de vitesse propre a chaque personnage auquel s'ajouterai un lancer de dés a chaque tour permettant de savoir quel personnage est le plus rapide a attaquer a chaque tour ou chaque attaque.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Si un personnage est mort durant l'une des phase, le combat s'arrete et le nom du vainqueur est révélé.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Evolution possible
+**Projet:**
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Monitoring avec SonarScanner
+Evolution vers des version plus récente d'OpenGl
 
-## License
-For open source projects, say how it is licensed.
+**Jeux:**
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Ajout de Model 3D pour le décors et les personnages.
+Animation du combat en temps réel
+Ajout de son ambiant
+Ajout de combat multiple ( Duo, Trio Armée Vs Armée)
+Décorélation des personnages et de l'équipement afin que l'utilisateur puisse créer un personnage de bout en bout et ne plus jouer d'archetypes.

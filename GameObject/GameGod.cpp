@@ -27,7 +27,7 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
 	json data = nullptr;
 
 	try {
-		///Parser JSON 
+		///Parser JSON
 		std::ifstream f(fileName);
 		data=json::parse(f);
 	}
@@ -76,7 +76,7 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
             CharacterWeapon->SetName("None");
         }
 		/*********************************************ARMOR CREATION***********************************************/
- 
+
 
         if (!Characters[i]["MyArmor"].empty())
         {
@@ -115,12 +115,12 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
 		if (characterClass == "Orc")
 		{
 			newCharacter = new Orc(name, pv, CharacterWeapon, CharacterArmor,cdCapacity ,nameCapacity, associateImg);
-			
+
 		}
 		else if (characterClass == "Knight")
 		{
 			newCharacter = new Knigth(name, pv, CharacterWeapon, CharacterArmor, cdCapacity, nameCapacity, associateImg);
-			
+
 		}
 
 		int ForceSide = Characters[i]["Alignement"];
@@ -184,7 +184,7 @@ HRESULT GameGod::LauchSpecialCapacity(Character *allianceFighter, Character *hor
 	hordeFighter->ClearLog();
 
 	return isAPlayerDead;
-	
+
 }
 
 
@@ -254,17 +254,17 @@ void GameGod::CheckStatusEffect(Character *allianceFighter )
 			break;
 
 		case BURN: //TODO
-		
+
 		case FROZEN: //TODO
 
 		case NORMAL: 
 			AddTurnInfo(allianceFighter->GetName() + " status is NORMAL");
 
-		default: 
+		default:
 
 			break;
 	}
-	
+
 
 }
 

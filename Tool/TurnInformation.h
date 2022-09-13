@@ -11,8 +11,8 @@ private:
     string _turnLog;
     int _turnNumber;
     bool _isGameOver;
-    Pv _pvCharacter1;
-    Pv _pvCharacter2;
+    Pv _pvAllianceFighter;
+    Pv _pvHordeFighter;
     HRESULT _isExecutionWell;
 
     string _winner;
@@ -29,20 +29,20 @@ public:
     void setTurnLog( string log) { _turnLog= log; };
     void setIsGameOver(bool IsGameOver) { _isGameOver = IsGameOver; }
 
-    void setPvCharacter(Pv Character1, Pv Character2)
+    void setPvCharacter(Pv AllianceFighter, Pv HordeFighter)
     {
-        _pvCharacter1 = Character1;
-        _pvCharacter2 = Character2;
+        _pvAllianceFighter = AllianceFighter;
+        _pvHordeFighter = HordeFighter;
     }
     HRESULT getIsExecutionWell() {
         return _isExecutionWell;
     }
 
-    Pv getPvCharacter1() {
-        return _pvCharacter1;
+    Pv getPvAllianceFighter() {
+        return _pvAllianceFighter;
     }
-    Pv getPvCharacter2() {
-        return _pvCharacter2;
+    Pv getPvHordeFighter() {
+        return _pvHordeFighter;
     }
 
     void setWinner(string winner)
