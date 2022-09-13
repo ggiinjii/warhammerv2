@@ -6,17 +6,12 @@
 		"Alignement":0,
 		"pv": 60,
 		"MyWeapon":{
-			   "type":"Sword",
-			 "damage":12,
-			 "Name": "Electric Sword"
-		  },
-		"MyArmor":{
-			  "type":"Shield",
-			 "pvBonus":12,
-			 "Name": "Bad Manner"
+			   "type":"Hammer",
+			 "damage":8,
+			 "Name": "Doom Hammer"
 		  },
 		"CdCapacity":5,
-		"NameCapacity":"Electric Stun",
+		"NameCapacity":"Stun",
 		"ImgSource":"..\\Ressources\\orc.jpg",
 		"SizeImg":{  "Height":200,
 			 "Width":200
@@ -29,9 +24,9 @@
 		"Alignement":0,
 		"pv": 20,
 		"MyWeapon":{
-			  "type":"Hammer",
+			  "type":"Sword",
 			 "damage":40,
-			 "Name": "Doom Hammer"
+			 "Name": "Apocalyptic Sword"
 		  },
 		"MyArmor":{
 			  "type":"Shield",
@@ -49,7 +44,7 @@
 		"Class":"Knight",
 		"Name":"Anduin",
 		"Alignement":1,
-		"pv": 10,
+		"pv": 20,
 		"MyWeapon":{
 			  "type":"Sword",
 			 "damage":5,
@@ -57,11 +52,11 @@
 		  },
 		"MyArmor":{
 			 "type":"Shield",
-			 "pvBonus":100,
+			 "pvBonus":50,
 			 "Name": "Divin Shield"
 		  },
 		"CdCapacity":5,
-		"NameCapacity":"Justice Trust",
+		"NameCapacity":"Charge",
 		"ImgSource":"..\\Ressources\\chevalier.jpg",
 		"SizeImg":{  "Height":200,
 			 "Width":200
