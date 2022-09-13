@@ -54,8 +54,10 @@ HRESULT Character::Attack(Character* Ennemy)
     std::stringstream logFight;
 
     if (Ennemy == nullptr)
-        PLOG_ERROR<<"Error: Ennemy NULL";
+    {
+        PLOG_ERROR << "Error: Ennemy NULL";
         return E_FAIL;
+    }
 
     if (_characterStatus == STUN)
     {

@@ -47,7 +47,10 @@ int main(int, char**)
 
     // Load Character Ressources
     HRESULT isLoadingCorrect = Kimimaro.LoadCharacterRessources("..\\Ressources\\Character.json");
-
+    if (isLoadingCorrect == E_FAIL)
+    {
+        return -1;
+    }
 
     int displayChoice = 0;
 

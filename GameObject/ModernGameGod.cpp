@@ -82,6 +82,11 @@ HRESULT ModernGameGod::LauchSpecialCapacity(Character* allianceFighter, Characte
 
     HRESULT result = allianceFighter->SpecialCapacityCheck(hordeFighter);
 
+    if (result == E_FAIL)
+    {
+        return result;
+    }
+
     std::list<string> characterlog = allianceFighter->GetLog();
 
     for (auto const& i : characterlog) {
