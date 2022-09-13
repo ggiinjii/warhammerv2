@@ -64,8 +64,8 @@ ModernUi::ModernUi()
     _isGameStarted = false;
 }
 
-ModernUi::ModernUi(vector<Character*> allianceSide, vector<Character*> hordeSide)
-    : _allianceSide(allianceSide), _hordeSide(hordeSide)
+ModernUi::ModernUi(vector<Character*> allianceFighters, vector<Character*> hordeFighters)
+    : _allianceSide(allianceFighters), _hordeSide(hordeFighters)
 {
     _isGameStarted = false;
 }
@@ -107,7 +107,7 @@ void ModernUi::displayModernUi()
     // variable definition for
     bool showUi = true;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-    static int goodguy_currentIndex = 0;
+    static int alliance_currentIndex = 0;
     static int horde_currentIndex = 0;
 
     // Main loop
@@ -138,7 +138,7 @@ void ModernUi::displayModernUi()
 
         /**********************************Alliance Character Windows****************************************************/
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_NoScrollWithMouse;
-        string fighterName = _allianceSide[goodguy_currentIndex]->GetName();
+        string fighterName = _allianceSide[alliance_currentIndex]->GetName();
         const char* combo_preview_value = fighterName.c_str();
 
         ImGui::BeginChild("AllianceRegion", ImVec2(ImGui::GetContentRegionAvail().x * 0.35f, 400), false, window_flags); // creation of a child windows for alliance information
@@ -148,9 +148,9 @@ void ModernUi::displayModernUi()
             // for each character on alliance side, we create the option in the comboBox
             for (int n = 0; n < _allianceSide.size(); n++)
             {
-                const bool is_selected = (goodguy_currentIndex == n);
+                const bool is_selected = (alliance_currentIndex == n);
                 if (ImGui::Selectable(_allianceSide[n]->GetName().c_str(), is_selected))
-                    goodguy_currentIndex = n;
+                    alliance_currentIndex = n;
 
                 // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
                 if (is_selected)
@@ -161,10 +161,10 @@ void ModernUi::displayModernUi()
 
 
         /* Use Soil Library to load an image file directly as a new OpenGL texture */
-        GLuint tex_2d = loadTexture(_allianceSide[goodguy_currentIndex]->getImage().getFileName());
+        GLuint tex_2d = loadTexture(_allianceSide[alliance_currentIndex]->getImage().getFileName());
 
         //GLuint tex_2d = loadTexture("..\\Ressources\\chevalier.jpg");
-        DisplayFighterProfile(tex_2d, _allianceSide[goodguy_currentIndex]);
+        DisplayFighterProfile(tex_2d, _allianceSide[alliance_currentIndex]);
 
         ImGui::EndChild();
 
@@ -210,12 +210,12 @@ void ModernUi::displayModernUi()
         {
             if (ImGui::Button("Start Battle"))
             {
-                logTurn = modernGameGod.StartModernBattle(_allianceSide[goodguy_currentIndex], _hordeSide[horde_currentIndex]);
+                logTurn = modernGameGod.StartModernBattle(_allianceSide[alliance_currentIndex], _hordeSide[horde_currentIndex]);
                 _isGameStarted = true;
                 _isGameOver = false;
                 disable_all = true;
 
-                _allianceSide[goodguy_currentIndex]->SetPv(logTurn.getPvCharacter1());
+                _allianceSide[alliance_currentIndex]->SetPv(logTurn.getPvCharacter1());
                 _hordeSide[horde_currentIndex]->SetPv(logTurn.getPvCharacter2());
                 _battleLog = logTurn.getlog();
                 _isGameOver = logTurn.getIsGameOver();
@@ -231,8 +231,8 @@ void ModernUi::displayModernUi()
                     ResetTurnInfo();
                     modernGameGod.ResetTurnInfo();
 
-                    logTurn = modernGameGod.NextTurn(_allianceSide[goodguy_currentIndex], _hordeSide[horde_currentIndex]);
-                    _allianceSide[goodguy_currentIndex]->SetPv(logTurn.getPvCharacter1());
+                    logTurn = modernGameGod.NextTurn(_allianceSide[alliance_currentIndex], _hordeSide[horde_currentIndex]);
+                    _allianceSide[alliance_currentIndex]->SetPv(logTurn.getPvCharacter1());
                     _hordeSide[horde_currentIndex]->SetPv(logTurn.getPvCharacter2());
                     _battleLog = logTurn.getlog();
                     _isGameOver = logTurn.getIsGameOver();

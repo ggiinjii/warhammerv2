@@ -14,8 +14,8 @@ private:
 
     Pv _hordeFighterPv;
     Pv _allianceFighterPv;
-	string _nameOrc;
-	string _nameKnight;
+	string _nameHordeFighter;
+	string _nameAllianceFighter;
 
 
 public:
@@ -34,9 +34,9 @@ public:
 
 	void ResetTurnInfo();
 
-	void SetPvOpponent(Pv goodGuyPv, Pv badGuyPV);
+	void SetPvOpponentPv(Pv AllianceFighterPv, Pv HordeFighterPV);
 
-	void SetOpponent(string knightName, string orcName);
+	void SetOpponent(string AllianceFighterName, string HordeFighterName);
 
 };
 

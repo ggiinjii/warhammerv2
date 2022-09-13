@@ -36,14 +36,14 @@ void RetroUi::displayUI()
         << "| |       \\  /`                ||                         |" << endl
         << "|          \\(                  ||                         |" << endl
         << " --------------------------------------------------------- " << endl
-        << "Name: " << _nameOrc << "                       Name: " << _nameKnight << endl
+        << "Name: " << _nameHordeFighter << "                       Name: " << _nameAllianceFighter << endl
         << "PV: " << _hordeFighterPv.getPv() << "/" << _hordeFighterPv.getPvMax() << "                              PV: " << _allianceFighterPv.getPv() << "/" << _allianceFighterPv.getPvMax() << endl << endl
         << "Battle Log: " << endl;
     DisplayTurnInformation();
 
 }
 
-void RetroUi::SetPvOpponent(Pv AllianceFighterPv, Pv HordeFighterPV  )
+void RetroUi::SetPvOpponentPv(Pv AllianceFighterPv, Pv HordeFighterPV  )
 {
     _hordeFighterPv = HordeFighterPV;
     _allianceFighterPv = AllianceFighterPv;
@@ -52,8 +52,8 @@ void RetroUi::SetPvOpponent(Pv AllianceFighterPv, Pv HordeFighterPV  )
 
 void RetroUi::SetOpponent(string AllianceFighterName, string HordeFighterName)
 {
-    _hordeFighterPv = HordeFighterName;
-    _allianceFighterPv = AllianceFighter;
+    _nameHordeFighter = HordeFighterName;
+    _nameAllianceFighter = AllianceFighterName;
 };
 
 std::list<string> RetroUi::getTurnInfo()

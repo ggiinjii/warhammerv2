@@ -27,7 +27,7 @@ private:
 
 public:
     ModernUi();
-    ModernUi(vector<Character*> _allianceSide, vector<Character*> _hordeSide);
+    ModernUi(vector<Character*> _allianceFighters, vector<Character*> _hordeFighters);
     ~ModernUi();
 
     void displayModernUi();
@@ -41,9 +41,9 @@ public:
 
     string GetLog() { return _battleLog; }
 
-    void setFighter(vector<Character*> GoodGuy, vector<Character*> BadGuy) {
-        _allianceSide = GoodGuy  ;
-        _hordeSide = BadGuy ;
+    void setFighter(vector<Character*> allianceFighters, vector<Character*> hordeFighters) {
+        _allianceSide = allianceFighters  ;
+        _hordeSide = hordeFighters ;
     }
 
     void setTurnNumber();
