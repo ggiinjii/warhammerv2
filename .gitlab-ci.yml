@@ -9,6 +9,15 @@ build_windows:
     - echo "Unit Test... PASSER PAR Vstest.console.exe MAIS TROUVER Où IL EST"
     - cd C:"\Program Files (x86)\Microsoft Visual Studio\"
     - ls
+    - echo "Voir Installer"
+    - cd "Installer"
+    - ls
+    - echo "Voir Shared"
+    - cd "..\Shared"
+    - ls
+    - echo "Voir 2019"
+    - cd "..\2019"
+    - ls
     #- C:"\Program Files (x86)\Microsoft Visual Studio\2019\Common7\IDE\Current\CommonExtensions\Microsoft\Vstest.console.exe" -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\x64\Debug\WarHammer-UnitTest.dll'
   tags:
     - shared-windows
