@@ -14,7 +14,7 @@ examples/*/Release/*
 examples/*/x64/*
 WarHammerV2/Debug/*
 WarHammerV2/Release/*
-WarHammer-UnitTest/*
+WarHammer-UnitTest/x64/*
 
 
 ## Visual Studio artifacts
@@ -33,6 +33,9 @@ ipch
 ## Commonly used CMake directories
 /build*/
 /Log*/
+WarHammerV2/Debug/*
+WarHammerV2/Release/*
+WarHammer-UnitTest/x64/*
 
 ## Log Result
 Log/*
