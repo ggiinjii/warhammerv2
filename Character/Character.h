@@ -21,7 +21,7 @@ enum CONDITION {
 
 class Character
 {
-protected: 
+protected:
 	string _nameCharacter;
 	Pv _pv;
 	const int _cdSpecialCapacity=0;
@@ -36,7 +36,7 @@ protected:
 
     Image _img;
 
-public : 
+public :
 	Character();
 	Character(string name,int pv, int cdSpecialCapacity, Weapon* myWeapon, Armor* myArmor, string nameCapacity, Image img);
 	~Character();
@@ -48,34 +48,23 @@ public :
 	void SetPv(Pv pv);
     Pv GetPv();
 
-
 	void setCharacterStatus(CONDITION status);
-
 	CONDITION getCharacterStatus();
 
 	HRESULT Attack(Character* Ennemy);
-
 	string GetHit(int damage);
-
 	bool IsCharacterStillAlive();
 
 	HRESULT SpecialCapacityCheck(Character* ennemy);
-
 	virtual EnhancedHresult SpecialCapacity(Character* ennemy) = 0;
-	
+
 	string GetName();
-
 	void SetWeapon(Weapon* weapon);
-
 	void SetArmor(Armor* armor);
-
 	void SetCurrentCd(int cd);
-
     string GetNameCapacity() { return _nameCapacity; }
-
     Weapon* GetWeapon() { return _weapon; }
     Armor* GetArmor() { return _armor; }
-
     Image getImage() { return _img; }
     void setImg(Image img) { _img = img; };
 

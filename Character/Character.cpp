@@ -51,32 +51,35 @@ CONDITION Character::getCharacterStatus()
 
 HRESULT Character::Attack(Character* Ennemy)
 {
-    std::stringstream ss;
+    std::stringstream logFight;
 
     if (Ennemy == nullptr)
+        PLOG_ERROR<<"Error: Ennemy NULL";
         return E_FAIL;
 
     if (_characterStatus == STUN)
     {
-        AddLog(_nameCharacter + " is Stun and Can't attack");
+        logFight<<_nameCharacter << " is Stun and can't attack";
+        AddLog(logFight);
         return S_FALSE;
     }
 
-    AddLog(_nameCharacter + " Attack");
+    logFight<<_nameCharacter << " Attack";
+    AddLog(logFight);
 
 
     int damage = 0;
     if (_weapon != nullptr)
     {
         damage = _weapon->DealDamage();
-       
-        ss << _nameCharacter << " Has a Weapon and will do " << damage << " point of damage to Ennemy " << Ennemy->GetName();
-        
+
+        logFight << _nameCharacter << " has a Weapon and will do " << damage << " point of damage to " << Ennemy->GetName();
+
     }
     else
     {
         damage = 1;// basic damage done by hand Combat
-        ss<<_nameCharacter << " Has no Weapon and will do 1 point of damage";
+        logFight<<_nameCharacter << " has no Weapon and so will do 1 point of damage to " << Ennemy->GetName();
     }
 
     if (_currentCd > 0)
@@ -87,60 +90,60 @@ HRESULT Character::Attack(Character* Ennemy)
 
     string damageLog=Ennemy->GetHit(damage);
 
-    ss <<endl<< damageLog;
+    logFight <<endl<< damageLog;
 
-    AddLog(ss.str());
+    AddLog(logFight.str());
 
     return S_OK;
 }
 
 string Character::GetHit(int damage)
 {
-    std::stringstream ss;
-    ss <<endl<< _nameCharacter << " get hit\n";
+    std::stringstream logFight;
+    logFight <<endl<< _nameCharacter << " get hit\n";
 
     if (_armor != nullptr && _armor->getArmorStatus() != DEAD)
     {
-        ss << "His armor blocked " << damage << " point of damage\n";
-        ss << _nameCharacter << " status:";
-        ss << "\nArmor : " << to_string(_armor->getDamaged(damage)) <<"/"<<_armor->GetPvMax();
-        ss << "\nPv : " << to_string(_pv.getPv())<<"/"<< to_string(_pv.getPvMax());
+        logFight << "His armor blocked " << damage << " point of damage\n";
+        logFight << _nameCharacter << " status:";
+        logFight << "\nArmor : " << to_string(_armor->getDamaged(damage)) <<"/"<<_armor->GetPvMax();
+        logFight << "\nPv : " << to_string(_pv.getPv())<<"/"<< to_string(_pv.getPvMax());
     }
     else
     {
         _pv = _pv - damage;
-        ss << _nameCharacter<<" Received : " << to_string(damage) << " Point of Damage\nPv Left : " << to_string(_pv.getPv()) << "/" << to_string(_pv.getPvMax());
+        logFight << _nameCharacter<<" received : " << to_string(damage) << " point of damage\nPv left : " << to_string(_pv.getPv()) << "/" << to_string(_pv.getPvMax());
     }
-    PLOG_INFO << ss.str();
-    return ss.str();
+    PLOG_INFO << logFight.str();
+    return logFight.str();
 }
 
 bool Character::IsCharacterStillAlive()
 {
     bool isStillAlive = (_pv.getPv() > 0);
-    std::stringstream ss;
-    ss << "\nis " << _nameCharacter << " still alive ? " << (isStillAlive ? "Oui" : "Non");
-   
-    PLOG_DEBUG << ss.str();
+    std::stringstream logFight;
+    logFight << "\nis " << _nameCharacter << " still alive ? " << (isStillAlive ? "Yes" : "No");
+
+    PLOG_DEBUG << logFight.str();
     return isStillAlive;
 }
 
 HRESULT Character::SpecialCapacityCheck(Character* ennemy)
 {
-    std::stringstream ss;
+    std::stringstream logFight;
 
     if (ennemy == nullptr)
     {
-        PLOG_ERROR << "ennemy is null";
-        ss << "\nNo ennemy Error";
-        AddLog(ss.str());
+        PLOG_ERROR << "\nError: ennemy is null";
+        logFight << "\nError: No ennemy (null)";
+        AddLog(logFight.str());
         return E_FAIL;
     }
 
     if (_characterStatus == STUN)
     {
-        ss <<endl<< _nameCharacter << " is stun. End of his turn";
-        AddLog(ss.str());
+        logFight <<endl<< _nameCharacter << " is stun. End of his turn";
+        AddLog(logFight.str());
         return S_FALSE;
     }
 
@@ -148,19 +151,18 @@ HRESULT Character::SpecialCapacityCheck(Character* ennemy)
     {
         _currentCd = _cdSpecialCapacity;
 
-
         EnhancedHresult result= SpecialCapacity(ennemy);
         AddLog(result.getMessage());
 
         if (result.getResult() != E_FAIL)
             return S_OK;
-        else 
+        else
             return E_FAIL;
     }
     else
     {
-        ss <<endl<< _nameCharacter << " Cannot Use Special Capacity : " << _nameCapacity << " this turn. He must wait: " << _currentCd << " turn";
-        AddLog(ss.str());
+        logFight <<endl<< _nameCharacter << " cannot Use Special Capacity : " << _nameCapacity << " this turn. He must wait: " << _currentCd << " turn";
+        AddLog(logFight.str());
 
         return S_FALSE;
     }

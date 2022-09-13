@@ -22,11 +22,12 @@ Knigth::~Knigth(void)
 EnhancedHresult Knigth::SpecialCapacity(Character* ennemy)
 {
 	EnhancedHresult result;
-	std::stringstream ss;
+	std::stringstream logFight;
 
 	if (ennemy == nullptr)
 	{
-		result.SetMessage("Character NULL");
+        PLOG_ERROR<<"Error: Ennemy NULL";
+		result.SetMessage("Error Character NULL");
 		result.SetResult(E_FAIL);
 		return result;
 	}
@@ -37,21 +38,21 @@ EnhancedHresult Knigth::SpecialCapacity(Character* ennemy)
 		int damagedDealed = _weapon->DealDamage() * 2;
 
 		_currentCd = _cdSpecialCapacity;
-	
-		ss << _nameCharacter << " use Special Capacity " << _nameCapacity << endl
+
+		logFight << _nameCharacter << " use Special Capacity " << _nameCapacity << endl
 			<< "Damage done : " << damagedDealed;
-		ss << ennemy->GetHit(damagedDealed);
+		logFight << ennemy->GetHit(damagedDealed);
 
 		result.SetResult(S_OK);
 	}
 	else
 	{
-		ss <<_nameCharacter << " Failed to use Special Capacity " << _nameCapacity;
+		logFight <<_nameCharacter << " failed to use special capacity " << _nameCapacity;
 		result.SetResult(S_FALSE);
-		
+
 	}
 
-	result.SetMessage(ss.str());
+	result.SetMessage(logFight.str());
 	return result;
 
 }
