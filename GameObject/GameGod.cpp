@@ -27,7 +27,7 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
 	json data = nullptr;
 
 	try {
-		///Parser JSON 
+		///Parser JSON
 		std::ifstream f(fileName);
 		data=json::parse(f);
 	}
@@ -48,7 +48,7 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
 
 		string name = Characters[i]["Name"];
 		int pv = Characters[i]["pv"];
-		
+
 		Weapon* CharacterWeapon = new Weapon();;
 		Armor* CharacterArmor = new Armor();;
 
@@ -76,7 +76,7 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
             CharacterWeapon->SetName("None");
         }
 		/*********************************************ARMOR CREATION***********************************************/
- 
+
 
         if (!Characters[i]["MyArmor"].empty())
         {
@@ -115,28 +115,28 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
 		if (characterClass == "Orc")
 		{
 			newCharacter = new Orc(name, pv, CharacterWeapon, CharacterArmor,cdCapacity ,nameCapacity, associateImg);
-			
+
 		}
 		else if (characterClass == "Knight")
 		{
 			newCharacter = new Knigth(name, pv, CharacterWeapon, CharacterArmor, cdCapacity, nameCapacity, associateImg);
-			
+
 		}
 
 		int ForceSide = Characters[i]["Alignement"];
 
 		switch (ForceSide)
 		{
-		case 0: 
+		case 0:
             BadGuy.push_back((Knigth*)newCharacter); // Light Side
 			break;
 
-		case 1: 
+		case 1:
             GoodGuy.push_back((Orc*)newCharacter); // Dark Side
 			break;
 
-		default: 
-			GoodGuy.push_back((Knigth*)newCharacter); // Let's assume that we are all good is 
+		default:
+			GoodGuy.push_back((Knigth*)newCharacter); // Let's assume that we are all good is
 			break;
 		}
 	}
@@ -170,7 +170,7 @@ HRESULT GameGod::LauchSpecialCapacity(Character *a, Character *b)
 		AddTurnInfo( b->GetName() + " Launch Special Capacity");
 
 		b->SpecialCapacityCheck(a);
-		
+
 		characterlog = b->GetLog();
 
 		for (auto const& i : characterlog) {
@@ -184,7 +184,7 @@ HRESULT GameGod::LauchSpecialCapacity(Character *a, Character *b)
 	b->ClearLog();
 
 	return isAPlayerDead;
-	
+
 }
 
 
@@ -254,17 +254,17 @@ void GameGod::CheckStatusEffect(Character *a )
 			break;
 
 		case BURN: //TODO
-		
+
 		case FROZEN: //TODO
 
-		case NORMAL: 
+		case NORMAL:
 			AddTurnInfo(a->GetName() + " status is NORMAL");
 
-		default: 
+		default:
 
 			break;
 	}
-	
+
 
 }
 
@@ -321,7 +321,7 @@ bool GameGod::NextTurn(Character* goodGuy, Character* badGuy)
     }
 
     AddTurnInfo("End Of Turn\n");
-    _retroUI.SetPvOpponent(goodGuy->GetPv(), badGuy->GetPv());
+    _retroUI.SetOpponentPV(goodGuy->GetPv(), badGuy->GetPv());
     _retroUI.displayUI();
 
     system("pause");
