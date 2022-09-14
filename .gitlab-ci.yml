@@ -13,3 +13,9 @@ Build_windows&Test:
     - shared-windows
     - windows
     - windows-1809
+  artifacts:
+    untracked: false
+    paths:
+      - "target/*.trx"
+      - "target/*"
+    expire_in: 30 days
