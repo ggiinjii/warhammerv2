@@ -16,6 +16,6 @@ Build_windows&Test:
   artifacts:
     untracked: false
     paths:
-      - "target/*.trx"
-      - "target/*"
+      - "*.trx"
+      - "*"
     expire_in: 30 days
