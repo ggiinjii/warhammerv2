@@ -48,7 +48,7 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
 
 		string name = Characters[i]["Name"];
 		int pv = Characters[i]["pv"];
-		
+
 		Weapon* CharacterWeapon = new Weapon();
 		Armor* CharacterArmor = new Armor();
 
@@ -127,16 +127,16 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
 
 		switch (ForceSide)
 		{
-		case 0: 
+		case 0:
             _hordeFighters.push_back((Knigth*)newCharacter); // Light Side
 			break;
 
-		case 1: 
+		case 1:
             _allianceFighters.push_back((Orc*)newCharacter); // Dark Side
 			break;
 
-		default: 
-			_allianceFighters.push_back((Knigth*)newCharacter); // Let's assume that we are all good is 
+		default:
+			_allianceFighters.push_back((Knigth*)newCharacter); // Let's assume that we are all good is
 			break;
 		}
 	}
@@ -175,7 +175,7 @@ HRESULT GameGod::LauchSpecialCapacity(Character *allianceFighter, Character *hor
 		AddTurnInfo( hordeFighter->GetName() + " Launch Special Capacity");
 
 		hordeFighter->SpecialCapacityCheck(allianceFighter);
-		
+
 		characterlog = hordeFighter->GetLog();
 
 		for (auto const& i : characterlog) {
@@ -262,7 +262,7 @@ void GameGod::CheckStatusEffect(Character *allianceFighter )
 
 		case FROZEN: //TODO
 
-		case NORMAL: 
+		case NORMAL:
 			AddTurnInfo(allianceFighter->GetName() + " status is NORMAL");
 
 		default:
@@ -359,7 +359,7 @@ void GameGod::RetroPlay()
 
     int inputFighter = -1;
 
-    cout << "\nVotre Choix: ";
+    cout << "\nYour Choice: ";
     inputFighter = SecureCinInput(_hordeFighters.size() - 1);
 
     cout << endl;
@@ -372,7 +372,7 @@ void GameGod::RetroPlay()
     cout << "Welcome to the Arena of Azeroth. Let's the fight between Aliance and horde Begin\n";
     cout << "Horde Side: ";
     DisplayNameFighter(_hordeFighters);
-    cout << "\nVotre Choix: ";
+    cout << "\nYour Choice: ";
     inputFighter=SecureCinInput(_hordeFighters.size()-1);
 
     Character* HordeFighter = _hordeFighters[inputFighter];
@@ -394,7 +394,7 @@ void GameGod::DisplayNameFighter(vector<Character*> Fighter)
 {
     for (int i = 0; i < Fighter.size(); i++)
     {
-        cout << Fighter[i]->GetName() << " - Entrez " << i << endl;
+        cout << Fighter[i]->GetName() << " - Enter " << i << endl;
     }
 }
 
@@ -424,7 +424,7 @@ int GameGod::SecureCinInput(int maxNumber)
         std::cout << "\nNumber incorrect ! " << std::endl;
         std::cin.clear();
         std::cin.ignore(256, '\n');
-        cout << "Votre Choix: ";
+        cout << "Your choice: ";
         std::cin >> inputFighter;
     }
     return inputFighter;
