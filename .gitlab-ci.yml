@@ -4,11 +4,13 @@ variables:
 Build_windows&Test:
   stage: build
   script:
-    - echo "Release build..."
-    - C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\WarHammerV2.sln'
-    - echo "Unit Test... "
-    - C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Vstest.console.exe"  'WarHammer-UnitTest\x64\Release\WarHammer-UnitTest.dll' /platform:x64 /logger:trx
-    
+    - cd C:\"Program Files (x86)\Microsoft Visual Studio\2019\" 
+    - ls
+   # - echo "Release build..."
+   # - C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" -t:'Rebuild' -p:'Configuration=Release' -p:'Platform=x64' -m '.\WarHammerV2.sln'
+   # - echo "Unit Test... "
+   # - C:"\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Vstest.console.exe"  'WarHammer-UnitTest\x64\Release\WarHammer-UnitTest.dll' /platform:x64 /logger:trx
+
   tags:
     - shared-windows
     - windows
