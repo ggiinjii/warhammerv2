@@ -50,16 +50,14 @@ propositions et de les implémenter.
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Le projet
-J'ai créer un projet console en Visual 2019 permettant a 2 camps identifié comme l'alliance et la Horde de faire s'affronter un champion les représentants dans une arene.
+J'ai créer un projet console en Visual 2019 permettant à 2 camps identifié comme l'alliance et la Horde de faire s'affronter un champion les représentants dans une arene.
 Crée en C++ et intégrant des librairies externes, il est compilable et exécutable en Debug ou Release.
 Afin que ce dernier soit robuste, j'ai ajouter des tests Unitaires me permettant un développement plus stable. Toutes les fonctions nouvellement ajouté sont testé m'assurant aucune régression lors de mes développements.
 Un systeme de monitoring a également été pensé via SonarScanner mais nécéssite une licence payante, rendant impossible sa mise en place dans un contexte personnel.
 
 **CI**
 
-	Job:  	Build - teste la compilation Release
-      		Test - Lance les Test Unitaires, Echoue si un test Echoue
-      		Package - Crée un package pour l'execution release.
+	Job:  	Build&Test - teste la compilation Release et lance les Test Unitaires, Echoue si un test Echoue
 
 **Dependance**
 
@@ -125,15 +123,17 @@ Si un personnage est mort durant l'une des phase, le combat s'arrete et le nom d
 
 
 ## Evolution possible
-**Projet:**
+**Projet**
 
 Monitoring avec SonarScanner
 Evolution vers des version plus récente d'OpenGl
+Ajout d'un job de Package a la Ci
 
-**Jeux:**
+**Jeux**
 
 Ajout de Model 3D pour le décors et les personnages.
 Animation du combat en temps réel
 Ajout de son ambiant
 Ajout de combat multiple ( Duo, Trio Armée Vs Armée)
 Décorélation des personnages et de l'équipement afin que l'utilisateur puisse créer un personnage de bout en bout et ne plus jouer d'archetypes.
+Ajout de différentes condition ( Burn, Frozen, etc)
