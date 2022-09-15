@@ -38,6 +38,11 @@ public:
         return _isExecutionWell;
     }
 
+    void setIsExecutionWell(HRESULT isExecution)
+    {
+        _isExecutionWell = isExecution;
+    }
+
     Pv getPvAllianceFighter() {
         return _pvAllianceFighter;
     }

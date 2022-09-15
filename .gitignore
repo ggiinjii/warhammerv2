@@ -12,9 +12,7 @@ examples/build/*
 examples/*/Debug/*
 examples/*/Release/*
 examples/*/x64/*
-WarHammerV2/Debug/*
-WarHammerV2/Release/*
-WarHammer-UnitTest/x64/*
+
 
 
 ## Visual Studio artifacts
@@ -29,6 +27,9 @@ ipch
 *.suo
 *.VC.db
 *.VC.VC.opendb
+WarHammerV2/Debug/*
+WarHammerV2/Release/*
+WarHammer-UnitTest/x64/*
 
 ## Commonly used CMake directories
 /build*/

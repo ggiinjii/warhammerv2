@@ -35,7 +35,14 @@ EnhancedHresult Knigth::SpecialCapacity(Character* ennemy)
 	srand((int)time(0));
 	if (rand() % 100 > 40)
 	{
-		int damagedDealed = _weapon->DealDamage() * 2;
+        int damagedDealed = 0;
+        if (_weapon!=nullptr)
+        {
+            damagedDealed=_weapon->DealDamage() * 2;
+        }
+        else {
+            damagedDealed = 2; // No weapon, base damage = 1 multiplied by 2 due to special Capacity 
+        }
 
 		_currentCd = _cdSpecialCapacity;
 

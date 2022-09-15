@@ -32,7 +32,12 @@ TurnInformation ModernGameGod::NextTurn(Character* allianceFighter, Character* h
     AddTurnInfo("Special Capacity Phase");
     _isGameOver = LauchSpecialCapacity(allianceFighter, hordeFighter);
 
-    if (_isGameOver != S_OK)
+    if (_isGameOver == E_FAIL)
+    {
+        logTurn.setIsExecutionWell(E_FAIL);
+        return logTurn;
+    }
+    else if (_isGameOver != S_OK )
     {
         AddTurnInfo("\n\nClassic Combat Phase");
         _isGameOver = ClassicFight(allianceFighter, hordeFighter);
@@ -54,6 +59,8 @@ TurnInformation ModernGameGod::NextTurn(Character* allianceFighter, Character* h
     logTurn.setTurnLog(_logTurn);
     if (_isGameOver==S_OK && _winner!=NULL)
         logTurn.setWinner(_winner->GetName());
+
+    logTurn.setIsExecutionWell(_isGameOver);
 
     return logTurn;
 }
@@ -137,6 +144,11 @@ HRESULT ModernGameGod::isAWinnerDecided(Character* allianceFighter, Character* h
 
 HRESULT ModernGameGod::ClassicFight(Character* allianceFighter, Character* hordeFighter)
 {
+    if (allianceFighter==nullptr || hordeFighter ==nullptr)
+    {
+        return E_FAIL;
+    }
+
     AddTurnInfo("\nCharacter " + allianceFighter->GetName() + " Attack normaly\n");
 
     allianceFighter->Attack(hordeFighter);
