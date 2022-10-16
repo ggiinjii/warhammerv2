@@ -21,6 +21,9 @@ namespace CharacterUnitTest
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, nullptr, 5, "Stun", img);
 			Assert::AreEqual(Thrall->GetPv().getPv(), 60);
             Assert::AreEqual(Thrall->GetPv().getPvMax(), 60);
+
+            delete Thrall;
+            Thrall = nullptr;
 		}
 
 		TEST_METHOD(SetPvSetPvTo100)
@@ -30,6 +33,9 @@ namespace CharacterUnitTest
 			Thrall->SetPv(Pv (100,100));
 			Assert::AreEqual(Thrall->GetPv().getPv(), 100);
             Assert::AreEqual(Thrall->GetPv().getPvMax(), 100);
+
+            delete Thrall;
+            Thrall = nullptr;
 		}
 
 		TEST_METHOD(GetCharacterStatusReturnNormal)
@@ -38,6 +44,8 @@ namespace CharacterUnitTest
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, nullptr, 5, "Stun", img);
 			
 			Assert::AreEqual((int)Thrall->getCharacterStatus(), (int)NORMAL);
+            delete Thrall;
+            Thrall = nullptr;
 		}
 
 		TEST_METHOD(setCharacterStatusToBurn)
@@ -46,6 +54,8 @@ namespace CharacterUnitTest
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, nullptr, 5, "Stun", img);
 			Thrall->setCharacterStatus(BURN);
 			Assert::AreEqual((int)Thrall->getCharacterStatus(), (int)BURN);
+            delete Thrall;
+            Thrall = nullptr;
 		}
 
 		TEST_METHOD(GetHitWithNoArmorReturn50)
@@ -55,6 +65,8 @@ namespace CharacterUnitTest
 			Thrall->GetHit(10);
 			Assert::AreEqual(Thrall->GetPv().getPv(), 50);
             Assert::AreEqual(Thrall->GetPv().getPvMax(), 60);
+            delete Thrall;
+            Thrall = nullptr;
 		}
 
 		TEST_METHOD(GetHitWithArmorReturn50)
@@ -65,6 +77,12 @@ namespace CharacterUnitTest
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, shield, 5, "Stun", img);
 			Thrall->GetHit(10);
 			Assert::AreEqual(Thrall->GetPv().getPv(), 60);
+
+            delete Thrall;
+            Thrall = nullptr;
+
+            delete shield;
+            shield = nullptr;
 		}
 
 		TEST_METHOD(IsCharacterStillAliveIsTrue)
@@ -73,6 +91,9 @@ namespace CharacterUnitTest
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, nullptr, 5, "Stun", img);
 			Thrall->GetHit(10);
 			Assert::IsTrue(Thrall->IsCharacterStillAlive());
+
+            delete Thrall;
+            Thrall = nullptr;
 		}
 
 		TEST_METHOD(IsCharacterStillAliveIsFalse)
@@ -83,6 +104,8 @@ namespace CharacterUnitTest
 			Assert::IsFalse(Thrall->IsCharacterStillAlive());
 			Thrall->GetHit(20);
 			Assert::IsFalse(Thrall->IsCharacterStillAlive());
+            delete Thrall;
+            Thrall = nullptr;
 		}
 
 		TEST_METHOD(GetNameReturnThrall)
@@ -91,6 +114,9 @@ namespace CharacterUnitTest
 			string orcName = "Thrall";
 			Orc* Thrall = new Orc(orcName, 60, nullptr, nullptr, 5, "Stun", img);
 			Assert::AreEqual(Thrall->GetName(), orcName);
+
+            delete Thrall;
+            Thrall = nullptr;
 		}
 
 		TEST_METHOD(AttackReturnS_OK)
@@ -113,6 +139,11 @@ namespace CharacterUnitTest
 			Assert::AreEqual(result, S_OK);
 			Assert::AreEqual(Billy->GetPv().getPv(), 9);
             Assert::AreEqual(Billy->GetPv().getPvMax(), 20);
+
+            delete Thrall;
+            Thrall = nullptr;
+            delete Billy;
+            Billy = nullptr;
 		}
 
 		TEST_METHOD(AttackReturnS_FALSE)
@@ -128,6 +159,10 @@ namespace CharacterUnitTest
 
 			Assert::AreEqual(result, S_FALSE);
 			Assert::AreEqual(Billy->GetPv().getPv(), 20);
+            delete Billy;
+            Billy = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 		}
 		TEST_METHOD(AttackReturnE_Fail)
 		{
@@ -141,6 +176,12 @@ namespace CharacterUnitTest
 			HRESULT result = Thrall->Attack(nullptr);
 			Assert::AreEqual(result, E_FAIL);
 			Assert::AreEqual(Billy->GetPv().getPv(), 20);
+            delete Billy;
+            Billy = nullptr;
+            delete orcSword;
+            orcSword = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 		}
 
 		TEST_METHOD(SpecialCapacityCheckReturnE_Fail)
@@ -150,6 +191,8 @@ namespace CharacterUnitTest
 			Orc* Thrall = new Orc(orcName, 60, nullptr, nullptr, 5, "Stun", img);
 
 			Assert::AreEqual(Thrall->SpecialCapacityCheck(nullptr), E_FAIL);
+            delete Thrall;
+            Thrall = nullptr;
 		}
 		TEST_METHOD(SpecialCapacityCheckReturnS_False)
 		{
@@ -165,6 +208,10 @@ namespace CharacterUnitTest
 			Thrall->setCharacterStatus(STUN);
 			Thrall->SetCurrentCd(0);
 			Assert::AreEqual(Thrall->SpecialCapacityCheck(Billy), S_FALSE);
+            delete Thrall;
+            Thrall = nullptr;
+            delete Billy;
+            Billy = nullptr;
 		}
 
 		TEST_METHOD(SpecialCapacityCheckReturnS_OK)
@@ -177,6 +224,10 @@ namespace CharacterUnitTest
 
 			Thrall->SetCurrentCd(0);
 			Assert::AreEqual(Thrall->SpecialCapacityCheck(Billy), S_OK);
+            delete Thrall;
+            Thrall = nullptr;
+            delete Billy;
+            Billy = nullptr;
 		}
 
 	};

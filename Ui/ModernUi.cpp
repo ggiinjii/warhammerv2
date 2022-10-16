@@ -62,17 +62,45 @@ void DisplayFighterProfile(GLuint texture, Character* fighter)
 ModernUi::ModernUi()
 {
     _isGameStarted = false;
+    _isGameOver = false;
+    _turnNumber = 0;
 }
 
 ModernUi::ModernUi(vector<Character*> allianceFighters, vector<Character*> hordeFighters)
     : _allianceSide(allianceFighters), _hordeSide(hordeFighters)
 {
     _isGameStarted = false;
+    _isGameOver = false;
+    _turnNumber = 0;
 }
 
 
 ModernUi::~ModernUi()
 {
+
+    if (!_allianceSide.empty())
+    {
+        for (int i = 0; _allianceSide.size(); i++)
+        {
+            Character* charact;
+            _allianceSide.push_back(charact);
+            delete charact;
+            charact = nullptr;
+
+        }
+    }
+
+    if (!_hordeSide.empty())
+    {
+        for (int i = 0; _hordeSide.size(); i++)
+        {
+            Character* charact;
+            _hordeSide.push_back(charact);
+            delete charact;
+            charact = nullptr;
+
+        }
+    }
 }
 
 

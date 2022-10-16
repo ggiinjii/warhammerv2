@@ -30,6 +30,10 @@ namespace ModernGameGodUnitTest
 			Assert::AreEqual("Thrall",resultFight.getWinner().c_str() );
 			Assert::AreEqual(1,resultFight.getTurnNumber() );
 			Assert::IsTrue(resultFight.getIsGameOver() );
+            delete Billy;
+            Billy = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 			
 		}
 		
@@ -45,6 +49,8 @@ namespace ModernGameGodUnitTest
 			TurnInformation resultFight=Kimimaro.StartModernBattle( nullptr, Thrall);
 			
 			Assert::AreEqual(E_FAIL,resultFight.getIsExecutionWell() );
+            delete Thrall;
+            Thrall = nullptr;
 			
 		}
 		
@@ -63,6 +69,10 @@ namespace ModernGameGodUnitTest
 			Assert::AreEqual("Thrall",resultFight.getWinner().c_str());
 			Assert::AreEqual(1,resultFight.getTurnNumber() );
 			Assert::IsTrue(resultFight.getIsGameOver() );
+            delete Billy;
+            Billy = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 			
 		}
 		
@@ -77,7 +87,9 @@ namespace ModernGameGodUnitTest
 			
 	
 			Assert::AreEqual(E_FAIL,resultFight.getIsExecutionWell() );
-			
+
+            delete Thrall;
+            Thrall = nullptr;
 		}
     
 	
@@ -91,7 +103,9 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.LauchSpecialCapacity( nullptr, Thrall);
 			
 			Assert::AreEqual(E_FAIL,resultFight );
-			
+
+            delete Thrall;
+            Thrall = nullptr;
 		}
 		
 		TEST_METHOD(LauchSpecialCapacityReturnS_OK)
@@ -105,6 +119,10 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.LauchSpecialCapacity( Billy, Thrall);
 			
 			Assert::AreEqual(S_OK,resultFight );
+            delete Billy;
+            Billy = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 			
 		}
 		
@@ -119,7 +137,11 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.LauchSpecialCapacity( Billy, Thrall);
 			
 			Assert::AreEqual(S_FALSE,resultFight );
-			
+
+            delete Billy;
+            Billy = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 		}
 	
 	
@@ -134,6 +156,10 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.isAWinnerDecided( Billy, Thrall);
 			
 			Assert::AreEqual(S_FALSE,resultFight );
+            delete Billy;
+            Billy = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 			
 		}
 		
@@ -148,7 +174,11 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.isAWinnerDecided( Billy, Thrall);
 			
 			Assert::AreEqual(S_OK,resultFight );
-			
+
+            delete Billy;
+            Billy = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 		}
 	
 		TEST_METHOD(isAWinnerDecidedReturnE_Fail)
@@ -161,7 +191,9 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.ClassicFight( nullptr, Thrall);
 			
 			Assert::AreEqual(E_FAIL,resultFight );
-			
+
+            delete Thrall;
+            Thrall = nullptr;
 		}
 	
 				TEST_METHOD(ClassicFightReturnS_OK)
@@ -175,7 +207,11 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.ClassicFight( Billy, Thrall);
 			
 			Assert::AreEqual(S_OK,resultFight );
-			
+
+            delete Billy;
+            Billy = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 		}
 		
 				TEST_METHOD(ClassicFightReturnS_False)
@@ -189,7 +225,11 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.ClassicFight( Billy, Thrall);
 			
 			Assert::AreEqual(S_FALSE,resultFight );
-			
+
+            delete Thrall;
+            Thrall = nullptr;
+            delete Billy;
+            Billy = nullptr;
 		}
             
 		TEST_METHOD(CheckStatusEffectForPlayersSetStatusToNormalIfStun)
@@ -206,7 +246,11 @@ namespace ModernGameGodUnitTest
 			
 			Assert::AreEqual((int)NORMAL, (int)Thrall->getCharacterStatus() );
 			Assert::AreEqual((int)NORMAL, (int)Billy->getCharacterStatus());
-			
+
+            delete Billy;
+            Billy = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 		}
 	
 		TEST_METHOD(CheckStatusEffectForPlayersNoChangeOfStatus)
@@ -225,7 +269,11 @@ namespace ModernGameGodUnitTest
 			
 			Assert::AreEqual((int)BURN, (int)Thrall->getCharacterStatus() );
 			Assert::AreEqual((int)NORMAL, (int)Billy->getCharacterStatus());
-			
+
+            delete Billy;
+            Billy = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 		}
         
 			

@@ -142,6 +142,12 @@
     <ClCompile Include="..\Ui\ModernUi.cpp">
       <Filter>sources\Ui\Modern Ui</Filter>
     </ClCompile>
+    <ClCompile Include="..\Inventory\Weapon\SubWeapon\BareHand.cpp">
+      <Filter>sources\Inventory\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Inventory\Armor\SubArmor\Cloth.cpp">
+      <Filter>sources\Inventory\Armor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Character\Character.h">
@@ -209,6 +215,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Downloads\WarHammerV2\Tool\EnhancedHresult.h">
       <Filter>Fichiers d%27en-tête\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inventory\Weapon\SubWeapon\BareHand.h">
+      <Filter>Fichiers d%27en-tête\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inventory\Armor\SubArmor\Cloth.h">
+      <Filter>Fichiers d%27en-tête\Inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

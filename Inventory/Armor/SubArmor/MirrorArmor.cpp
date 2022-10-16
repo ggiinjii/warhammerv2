@@ -13,7 +13,7 @@ MirrorArmor::~MirrorArmor()
 
 int MirrorArmor::ReflectDamage(int damagereceive)
 {
-	if (_nbUse = !0)
+	if (_nbUse =! 0)
 	{
 		_nbUse = _nbUse - 1;
 

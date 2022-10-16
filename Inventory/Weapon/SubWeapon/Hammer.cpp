@@ -11,3 +11,10 @@ Hammer::Hammer(int dammage) : Weapon(dammage)
 Hammer::~Hammer(void)
 {
 }
+
+int Hammer::SpecialCapacity()
+{
+    // todo
+
+    return 0;
+}

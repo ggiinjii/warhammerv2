@@ -9,7 +9,7 @@ public :
 	Sword(void);
 	Sword(int damage);
 	~Sword(void);
-
+    int SpecialCapacity();
 
 };
 

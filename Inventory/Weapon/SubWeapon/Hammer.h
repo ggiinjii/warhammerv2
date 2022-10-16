@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <cstdlib>
 
-// The Hammer is a very Powerfull weapon which can deal 2x his basic dammage with 75% of precision. 
+// this class is created to be able to add special capacity 
 
 class Hammer : public Weapon
 {
@@ -13,6 +13,7 @@ public:
 	Hammer(void);
 	Hammer(int dammage);
 	~Hammer(void);
+    int SpecialCapacity();
 
 };
 

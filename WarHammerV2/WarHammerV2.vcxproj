@@ -167,8 +167,10 @@
     <ClCompile Include="..\Character\Horde\Orc.cpp" />
     <ClCompile Include="..\GameObject\GameGod.cpp" />
     <ClCompile Include="..\Inventory\Armor\Armor.cpp" />
+    <ClCompile Include="..\Inventory\Armor\SubArmor\Cloth.cpp" />
     <ClCompile Include="..\Inventory\Armor\SubArmor\MirrorArmor.cpp" />
     <ClCompile Include="..\Inventory\Armor\SubArmor\Shield.cpp" />
+    <ClCompile Include="..\Inventory\Weapon\SubWeapon\BareHand.cpp" />
     <ClCompile Include="..\Inventory\Weapon\SubWeapon\Hammer.cpp" />
     <ClCompile Include="..\Inventory\Weapon\SubWeapon\Sword.cpp" />
     <ClCompile Include="..\Inventory\Weapon\Weapon.cpp" />
@@ -192,8 +194,10 @@
     <ClInclude Include="..\Character\Horde\Orc.h" />
     <ClInclude Include="..\GameObject\GameGod.h" />
     <ClInclude Include="..\Inventory\Armor\Armor.h" />
+    <ClInclude Include="..\Inventory\Armor\SubArmor\Cloth.h" />
     <ClInclude Include="..\Inventory\Armor\SubArmor\MirrorArmor.h" />
     <ClInclude Include="..\Inventory\Armor\SubArmor\Shield.h" />
+    <ClInclude Include="..\Inventory\Weapon\SubWeapon\BareHand.h" />
     <ClInclude Include="..\Inventory\Weapon\SubWeapon\Hammer.h" />
     <ClInclude Include="..\Inventory\Weapon\SubWeapon\Sword.h" />
     <ClInclude Include="..\Inventory\Weapon\Weapon.h" />

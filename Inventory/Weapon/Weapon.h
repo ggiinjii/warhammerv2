@@ -14,7 +14,7 @@ protected:
 public:
 	Weapon(void);
 	Weapon(int dammage);
-	~Weapon(void);
+	virtual ~Weapon(void)=0;
 
 	int DealDamage();
 
@@ -24,5 +24,8 @@ public:
     void SetName(string name) {
         _name = name;
     }
+
+    virtual int SpecialCapacity() = 0;
+
 };
 

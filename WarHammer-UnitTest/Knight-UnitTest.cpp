@@ -39,6 +39,10 @@ namespace KnightUnitTest
 				Assert::AreEqual(Thrall->GetPv().getPv(),60 );
 
             Assert::AreEqual(Thrall->GetPv().getPvMax(), 60);
+            delete LunarSword;
+            LunarSword = nullptr;
+            delete Thrall;
+            Thrall = nullptr;
 		}
 	};
 }

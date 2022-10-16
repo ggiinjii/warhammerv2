@@ -11,7 +11,7 @@ private:
     string _message;
 
 public : 
-    EnhancedHresult(){};
+    EnhancedHresult() { _result = E_FAIL; _message = ""; };
     ~EnhancedHresult(){};
 
     void SetResult(HRESULT result) { _result = result; };

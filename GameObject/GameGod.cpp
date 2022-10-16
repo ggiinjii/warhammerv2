@@ -4,6 +4,8 @@
 #include "Character/Character.h"
 #include "Inventory/Weapon/SubWeapon/Hammer.h"
 #include "Inventory/Armor/SubArmor/MirrorArmor.h"
+#include "Inventory/Weapon/SubWeapon/BareHand.h"
+#include "Inventory/Armor/SubArmor/Cloth.h"
 #include "Ui/ModernUi.h"
 #include <iostream>
 #include "Tool/Image.h"
@@ -11,51 +13,93 @@
 
 GameGod::GameGod(void)
 {
-	_winner = nullptr;
-	_allianceFighter= nullptr;
-	_hordeFighter= nullptr;
+    _winner = nullptr;
+    _allianceFighter = nullptr;
+    _hordeFighter = nullptr;
     _isGameOver = E_FAIL;
     _turnCount = 0;
 }
 
 GameGod::~GameGod()
 {
+    if (_winner != nullptr)
+    {
+        delete _winner;
+        _winner = nullptr;
+    }
+
+    if (_allianceFighter != nullptr)
+    {
+        delete _allianceFighter;
+        _allianceFighter = nullptr;
+    }
+
+    if (_hordeFighter != nullptr)
+    {
+        delete _hordeFighter;
+        _hordeFighter = nullptr;
+    }
+
+    if (!_allianceFighters.empty())
+    {
+        for (int i = 0; _allianceFighters.size(); i++)
+        {
+            Character* charact;
+            _allianceFighters.push_back(charact);
+            delete charact;
+            charact = nullptr;
+
+        }
+    }
+
+    if (!_hordeFighters.empty())
+    {
+        for (int i = 0; _hordeFighters.size(); i++)
+        {
+            Character* charact;
+            _hordeFighters.push_back(charact);
+            delete charact;
+            charact = nullptr;
+
+        }
+    }
 }
 
-HRESULT GameGod::LoadCharacterRessources( string fileName)
+HRESULT GameGod::LoadCharacterRessources(string fileName)
 {
-	json data = nullptr;
+    json data = nullptr;
 
-	try {
-		///Parser JSON
-		std::ifstream f(fileName);
-		data=json::parse(f);
-	}
-	catch (exception e)
-	{
-		PLOG_ERROR << "Parsing of Json Failed. Filename: "<< fileName;
-		throw e;
-	}
+    try {
+        ///Parser JSON
+        std::ifstream f(fileName);
+        data = json::parse(f);
+    }
+    catch (exception e)
+    {
+        PLOG_ERROR << "Parsing of Json Failed. Filename: " << fileName;
+        throw e;
+    }
 
-	auto Characters = data["Character"];
-	int nbCharacter = Characters.size();
+    auto Characters = data["Character"];
+    int nbCharacter = (int)Characters.size();
 
 
-	/*********************************************CHARACTER CREATION***********************************************/
+    /*********************************************CHARACTER CREATION***********************************************/
 
-	for (int i = 0; i < nbCharacter; i++)
-	{
+    for (int i = 0; i < nbCharacter; i++)
+    {
 
-		string name = Characters[i]["Name"];
-		int pv = Characters[i]["pv"];
+        string name = Characters[i]["Name"];
+        int pv = Characters[i]["pv"];
 
-		Weapon* CharacterWeapon = new Weapon();
-		Armor* CharacterArmor = new Armor();
+        Weapon* CharacterWeapon;
+        Armor* CharacterArmor;
 
         /*********************************************SWORD CREATION***********************************************/
         if (!Characters[i]["MyWeapon"].empty())
         {
             string weapon = Characters[i]["MyWeapon"]["type"];
+
 
             if (weapon == "Sword")
             {
@@ -65,17 +109,22 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
             {
                 CharacterWeapon = new Hammer();
             }
+            else
+            {
+                CharacterWeapon = new  BareHand();
+            }
             CharacterWeapon->setDamage(Characters[i]["MyWeapon"]["damage"]);
 
-            string weaponName= Characters[i]["MyWeapon"]["Name"];
+            string weaponName = Characters[i]["MyWeapon"]["Name"];
             CharacterWeapon->SetName(weaponName);
         }
         else
         {
+            CharacterWeapon = new Sword();
             CharacterWeapon->setDamage(0);
             CharacterWeapon->SetName("None");
         }
-		/*********************************************ARMOR CREATION***********************************************/
+        /*********************************************ARMOR CREATION***********************************************/
 
 
         if (!Characters[i]["MyArmor"].empty())
@@ -90,201 +139,216 @@ HRESULT GameGod::LoadCharacterRessources( string fileName)
             {
                 CharacterArmor = new MirrorArmor();
             }
+            else
+            {
+                CharacterArmor = new Cloth();
+            }
             CharacterArmor->setPvBonus(Characters[i]["MyArmor"]["pvBonus"]);
             string armorName = Characters[i]["MyArmor"]["Name"];
             CharacterArmor->SetName(armorName);
         }
         else
         {
+            CharacterArmor = new Shield();
             CharacterArmor->setPvBonus(0);
             CharacterArmor->SetName("None");
         }
 
 
-		int cdCapacity = Characters[i]["CdCapacity"];
-			string nameCapacity = Characters[i]["NameCapacity"];
+        int cdCapacity = Characters[i]["CdCapacity"];
+        string nameCapacity = Characters[i]["NameCapacity"];
 
-		Character* newCharacter = nullptr;
+        Character* newCharacter = nullptr;
 
-		string characterClass = Characters[i]["Class"];
+        string characterClass = Characters[i]["Class"];
 
         Image associateImg(Characters[i]["ImgSource"], Characters[i]["SizeImg"]["Height"], Characters[i]["SizeImg"]["Width"]);
 
-		/*********************************************CLASS CREATION***********************************************/
+        /*********************************************CLASS CREATION***********************************************/
 
-		if (characterClass == "Orc")
-		{
-			newCharacter = new Orc(name, pv, CharacterWeapon, CharacterArmor,cdCapacity ,nameCapacity, associateImg);
+        if (characterClass == "Orc")
+        {
+            newCharacter = new Orc(name, pv, CharacterWeapon, CharacterArmor, cdCapacity, nameCapacity, associateImg);
 
-		}
-		else if (characterClass == "Knight")
-		{
-			newCharacter = new Knigth(name, pv, CharacterWeapon, CharacterArmor, cdCapacity, nameCapacity, associateImg);
+        }
+        else if (characterClass == "Knight")
+        {
+            newCharacter = new Knigth(name, pv, CharacterWeapon, CharacterArmor, cdCapacity, nameCapacity, associateImg);
 
-		}
+        }
 
-		int ForceSide = Characters[i]["Alignement"];
+        int ForceSide = Characters[i]["Alignement"];
 
-		switch (ForceSide)
-		{
-		case 0:
+        switch (ForceSide)
+        {
+        case 0:
             _hordeFighters.push_back((Knigth*)newCharacter); // Light Side
-			break;
+            break;
 
-		case 1:
+        case 1:
             _allianceFighters.push_back((Orc*)newCharacter); // Dark Side
-			break;
+            break;
 
-		default:
-			_allianceFighters.push_back((Knigth*)newCharacter); // Let's assume that we are all good is
-			break;
-		}
-	}
-	return S_OK;
+        default:
+            _allianceFighters.push_back((Knigth*)newCharacter); // Let's assume that we are all good is
+            break;
+        }
+
+        delete newCharacter;
+        delete CharacterWeapon;
+        delete CharacterArmor;
+
+        newCharacter = nullptr;
+        CharacterWeapon = nullptr;
+        CharacterArmor = nullptr;
+
+    }
+
+    return S_OK;
 }
 
-HRESULT GameGod::LauchSpecialCapacity(Character *allianceFighter, Character *hordeFighter)
+HRESULT GameGod::LauchSpecialCapacity(Character* allianceFighter, Character* hordeFighter)
 {
-	if (allianceFighter == nullptr || hordeFighter == nullptr)
-	{
-		AddTurnInfo("Error with Character. Check logfile\n");
-		PLOG_ERROR << "One of the caracter is Null:" <<" - Character allianceFighter: "<<allianceFighter<<" - Character hordeFighters:"<<hordeFighter;
-		return E_FAIL;
-	}
+    if (allianceFighter == nullptr || hordeFighter == nullptr)
+    {
+        AddTurnInfo("Error with Character. Check logfile\n");
+        PLOG_ERROR << "One of the caracter is Null:" << " - Character allianceFighter: " << allianceFighter << " - Character hordeFighters:" << hordeFighter;
+        return E_FAIL;
+    }
 
-	AddTurnInfo(allianceFighter->GetName() + " Launch Special Capacity");
+    AddTurnInfo(allianceFighter->GetName() + " Launch Special Capacity");
 
-	HRESULT result=allianceFighter->SpecialCapacityCheck(hordeFighter);
+    HRESULT result = allianceFighter->SpecialCapacityCheck(hordeFighter);
 
     if (result == E_FAIL)
     {
         return result;
     }
 
-	std::list<string> characterlog = allianceFighter->GetLog();
+    std::list<string> characterlog = allianceFighter->GetLog();
 
-	for (auto const& i : characterlog) {
-		AddTurnInfo(i);
-	}
+    for (auto const& i : characterlog) {
+        AddTurnInfo(i);
+    }
 
 
-	HRESULT isAPlayerDead = isAWinnerDecided(allianceFighter, hordeFighter);
+    HRESULT isAPlayerDead = isAWinnerDecided(allianceFighter, hordeFighter);
 
-	if (isAPlayerDead==S_FALSE)
-	{
-		AddTurnInfo( hordeFighter->GetName() + " Launch Special Capacity");
+    if (isAPlayerDead == S_FALSE)
+    {
+        AddTurnInfo(hordeFighter->GetName() + " Launch Special Capacity");
 
-		hordeFighter->SpecialCapacityCheck(allianceFighter);
+        hordeFighter->SpecialCapacityCheck(allianceFighter);
 
-		characterlog = hordeFighter->GetLog();
+        characterlog = hordeFighter->GetLog();
 
-		for (auto const& i : characterlog) {
-			AddTurnInfo(i);
-		}
+        for (auto const& i : characterlog) {
+            AddTurnInfo(i);
+        }
 
-		isAPlayerDead = isAWinnerDecided(allianceFighter, hordeFighter);
-	}
+        isAPlayerDead = isAWinnerDecided(allianceFighter, hordeFighter);
+    }
 
-	allianceFighter->ClearLog();
-	hordeFighter->ClearLog();
+    allianceFighter->ClearLog();
+    hordeFighter->ClearLog();
 
-	return isAPlayerDead;
+    return isAPlayerDead;
 
 }
 
 
 HRESULT GameGod::isAWinnerDecided(Character* allianceFighter, Character* hordeFighter)
 {
-	if (!allianceFighter->IsCharacterStillAlive())
-	{
-		setWinner(hordeFighter);
-		return S_OK;
-	}
-	else if (!hordeFighter->IsCharacterStillAlive())
-	{
-		setWinner(allianceFighter);
-		return S_OK;
-	}
-	else
-		return S_FALSE;
+    if (!allianceFighter->IsCharacterStillAlive())
+    {
+        setWinner(hordeFighter);
+        return S_OK;
+    }
+    else if (!hordeFighter->IsCharacterStillAlive())
+    {
+        setWinner(allianceFighter);
+        return S_OK;
+    }
+    else
+        return S_FALSE;
 }
 
-HRESULT GameGod::ClassicFight(Character *allianceFighter, Character *hordeFighter)
+HRESULT GameGod::ClassicFight(Character* allianceFighter, Character* hordeFighter)
 {
-	AddTurnInfo("Character " + allianceFighter->GetName() + " Attack normaly");
+    AddTurnInfo("Character " + allianceFighter->GetName() + " Attack normaly");
 
-	allianceFighter->Attack(hordeFighter);
+    allianceFighter->Attack(hordeFighter);
 
-	std::list<string> characterlog = allianceFighter->GetLog();
+    std::list<string> characterlog = allianceFighter->GetLog();
 
-	for (auto const& i : characterlog) {
-		AddTurnInfo(i);
-	}
+    for (auto const& i : characterlog) {
+        AddTurnInfo(i);
+    }
 
 
-	if (isAWinnerDecided(allianceFighter, hordeFighter)==S_FALSE)
-	{
-		AddTurnInfo("\nCharacter " + hordeFighter->GetName() + " Attack normaly");
+    if (isAWinnerDecided(allianceFighter, hordeFighter) == S_FALSE)
+    {
+        AddTurnInfo("\nCharacter " + hordeFighter->GetName() + " Attack normaly");
 
-		hordeFighter->Attack(allianceFighter);
+        hordeFighter->Attack(allianceFighter);
 
-		characterlog = hordeFighter->GetLog();
+        characterlog = hordeFighter->GetLog();
 
-		for (auto const& i : characterlog) {
-			AddTurnInfo(i);
-		}
-	}
+        for (auto const& i : characterlog) {
+            AddTurnInfo(i);
+        }
+    }
 
-	allianceFighter->ClearLog();
-	hordeFighter->ClearLog();
+    allianceFighter->ClearLog();
+    hordeFighter->ClearLog();
 
-	return isAWinnerDecided(allianceFighter, hordeFighter);
+    return isAWinnerDecided(allianceFighter, hordeFighter);
 }
 
 void GameGod::CheckStatusEffectForPlayers(Character* allianceFighter, Character* hordeFighter)
 {
-	CheckStatusEffect( allianceFighter);
-	CheckStatusEffect( hordeFighter);
+    CheckStatusEffect(allianceFighter);
+    CheckStatusEffect(hordeFighter);
 
 }
 
 
-void GameGod::CheckStatusEffect(Character *allianceFighter )
+void GameGod::CheckStatusEffect(Character* allianceFighter)
 {
-	CONDITION status= allianceFighter->getCharacterStatus();
-	switch (status)
-	{
-		case STUN: allianceFighter->setCharacterStatus(NORMAL);
-			AddTurnInfo("Character " + allianceFighter->GetName() + " Cured from STUN");
-			break;
+    CONDITION status = allianceFighter->getCharacterStatus();
+    switch (status)
+    {
+    case STUN: allianceFighter->setCharacterStatus(NORMAL);
+        AddTurnInfo("Character " + allianceFighter->GetName() + " Cured from STUN");
+        break;
 
-		case BURN: //TODO
+    case BURN: //TODO
 
-		case FROZEN: //TODO
+    case FROZEN: //TODO
 
-		case NORMAL:
-			AddTurnInfo(allianceFighter->GetName() + " status is NORMAL");
+    case NORMAL:
+        AddTurnInfo(allianceFighter->GetName() + " status is NORMAL");
 
-		default:
+    default:
 
-			break;
-	}
+        break;
+    }
 
 
 }
 
-void GameGod::StartRetroBattle(Character* allianceFighter, Character *hordeFighter)
+void GameGod::StartRetroBattle(Character* allianceFighter, Character* hordeFighter)
 {
-     _isGameOver = E_FAIL;
-     _turnCount = 0;
+    _isGameOver = E_FAIL;
+    _turnCount = 0;
 
-	_retroUI.SetOpponent(allianceFighter->GetName(), hordeFighter->GetName());
+    _retroUI.SetOpponent(allianceFighter->GetName(), hordeFighter->GetName());
 
-	PLOG_INFO << "The battle Begin";
-	while (_isGameOver != S_OK)
-	{
+    PLOG_INFO << "The battle Begin";
+    while (_isGameOver != S_OK)
+    {
         _isGameOver = NextTurn(allianceFighter, hordeFighter);
-	}
+    }
 }
 
 void GameGod::StartModernBattle(Character* allianceFighter, Character* hordeFighter)
@@ -338,20 +402,20 @@ HRESULT GameGod::NextTurn(Character* allianceFighter, Character* hordeFighter)
 
 void GameGod::AddTurnInfo(string info)
 {
-	PLOG_INFO << info;
-	_retroUI.AddTurnInfo(info);
+    PLOG_INFO << info;
+    _retroUI.AddTurnInfo(info);
 }
 
 void GameGod::resetTurnInfo()
 {
-	_retroUI.ResetTurnInfo();
+    _retroUI.ResetTurnInfo();
 }
 
 void GameGod::RetroPlay()
 {
-	/******************CHOIX DE L'ADVERSAIRE************************/
+    /******************CHOIX DE L'ADVERSAIRE************************/
     system("cls");
-	cout << "Welcome to the Arena of Azeroth. Let's the fight between Aliance and horde Begin\n";
+    cout << "Welcome to the Arena of Azeroth. Let's the fight between Aliance and horde Begin\n";
 
     cout << "Please Select alliance and horde Fighter!\n"
         << "Alliance Side: \n";
@@ -360,7 +424,7 @@ void GameGod::RetroPlay()
     int inputFighter = -1;
 
     cout << "\nYour Choice: ";
-    inputFighter = SecureCinInput(_hordeFighters.size() - 1);
+    inputFighter = SecureCinInput((int)_hordeFighters.size() - 1);
 
     cout << endl;
     Character* AllianceFighter = _allianceFighters[inputFighter];
@@ -373,7 +437,7 @@ void GameGod::RetroPlay()
     cout << "Horde Side: ";
     DisplayNameFighter(_hordeFighters);
     cout << "\nYour Choice: ";
-    inputFighter=SecureCinInput(_hordeFighters.size()-1);
+    inputFighter = SecureCinInput((int)_hordeFighters.size() - 1);
 
     Character* HordeFighter = _hordeFighters[inputFighter];
     DisplayFighter(HordeFighter);
@@ -381,13 +445,13 @@ void GameGod::RetroPlay()
     cout << "Press Enter to Start the Battle";
     system("pause");
 
-	StartRetroBattle(AllianceFighter, HordeFighter);
+    StartRetroBattle(AllianceFighter, HordeFighter);
 
-	resetTurnInfo();
-	AddTurnInfo("The Game is Over.");
-	AddTurnInfo("The Winner is " + GetWinner()->GetName() );
+    resetTurnInfo();
+    AddTurnInfo("The Game is Over.");
+    AddTurnInfo("The Winner is " + GetWinner()->GetName());
 
-	_retroUI.displayUI();
+    _retroUI.displayUI();
 }
 
 void GameGod::DisplayNameFighter(vector<Character*> Fighter)
@@ -434,18 +498,18 @@ int GameGod::SecureCinInput(int maxNumber)
 
 void GameGod::SetOpponent(Character* allianceFighters, Character* hordeFighters)
 {
-	_allianceFighter = allianceFighters;
-	_hordeFighter = hordeFighters;
+    _allianceFighter = allianceFighters;
+    _hordeFighter = hordeFighters;
 }
 
 void GameGod::setWinner(Character* winner)
 {
-	PLOG_INFO << "We have allianceFighter winner ";
+    PLOG_INFO << "We have allianceFighter winner ";
 
-	_winner = winner;
+    _winner = winner;
 }
 
 Character* GameGod::GetWinner()
 {
-	return _winner;
+    return _winner;
 }

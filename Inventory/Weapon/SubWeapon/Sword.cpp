@@ -12,3 +12,10 @@ Sword::Sword(int damage)
 Sword::~Sword(void)
 {
 }
+
+int Sword::SpecialCapacity()
+{
+    // todo
+
+    return 0;
+}

@@ -7,6 +7,8 @@ Character::Character()
     _pv.SetFullPv(0);
     _characterStatus = NORMAL;
     _currentCd = 0;
+    _weapon = nullptr;
+    _armor = nullptr;
 }
 
 Character::Character(string name, int pv, int cdSpecialCapacity, Weapon* myWeapon, Armor* myArmor, string nameCapacity, Image img)
@@ -19,6 +21,17 @@ Character::Character(string name, int pv, int cdSpecialCapacity, Weapon* myWeapo
 
 Character::~Character()
 {
+    if (_weapon != nullptr)
+    {
+        delete _weapon;
+        _weapon = nullptr;
+    }
+
+    if (_armor != nullptr)
+    {
+        delete _armor;
+        _armor = nullptr;
+    }
 }
 
 
@@ -61,12 +74,12 @@ HRESULT Character::Attack(Character* Ennemy)
 
     if (_characterStatus == STUN)
     {
-        logFight<<_nameCharacter << " is Stun and can't attack";
+        logFight << _nameCharacter << " is Stun and can't attack";
         AddLog(logFight.str());
         return S_FALSE;
     }
 
-    logFight<<_nameCharacter << " Attack";
+    logFight << _nameCharacter << " Attack";
     AddLog(logFight.str());
 
 
@@ -81,18 +94,18 @@ HRESULT Character::Attack(Character* Ennemy)
     else
     {
         damage = 1;// basic damage done by hand Combat
-        logFight<<_nameCharacter << " has no Weapon and so will do 1 point of damage to " << Ennemy->GetName();
+        logFight << _nameCharacter << " has no Weapon and so will do 1 point of damage to " << Ennemy->GetName();
     }
 
     if (_currentCd > 0)
     {
         _currentCd = _currentCd - 1; // one turn passed, Cd go down
-        PLOG_DEBUG<<"Turn Over, Cd go down, turn left : " << to_string(_currentCd);
+        PLOG_DEBUG << "Turn Over, Cd go down, turn left : " << to_string(_currentCd);
     }
 
-    string damageLog=Ennemy->GetHit(damage);
+    string damageLog = Ennemy->GetHit(damage);
 
-    logFight <<endl<< damageLog;
+    logFight << endl << damageLog;
 
     AddLog(logFight.str());
 
@@ -102,19 +115,19 @@ HRESULT Character::Attack(Character* Ennemy)
 string Character::GetHit(int damage)
 {
     std::stringstream logFight;
-    logFight <<endl<< _nameCharacter << " get hit\n";
+    logFight << endl << _nameCharacter << " get hit\n";
 
     if (_armor != nullptr && _armor->getArmorStatus() != DEAD)
     {
         logFight << "His armor blocked " << damage << " point of damage\n";
         logFight << _nameCharacter << " status:";
-        logFight << "\nArmor : " << to_string(_armor->getDamaged(damage)) <<"/"<<_armor->GetPvMax();
-        logFight << "\nPv : " << to_string(_pv.getPv())<<"/"<< to_string(_pv.getPvMax());
+        logFight << "\nArmor : " << to_string(_armor->getDamaged(damage)) << "/" << _armor->GetPvMax();
+        logFight << "\nPv : " << to_string(_pv.getPv()) << "/" << to_string(_pv.getPvMax());
     }
     else
     {
         _pv = _pv - damage;
-        logFight << _nameCharacter<<" received : " << to_string(damage) << " point of damage\nPv left : " << to_string(_pv.getPv()) << "/" << to_string(_pv.getPvMax());
+        logFight << _nameCharacter << " received : " << to_string(damage) << " point of damage\nPv left : " << to_string(_pv.getPv()) << "/" << to_string(_pv.getPvMax());
     }
     PLOG_INFO << logFight.str();
     return logFight.str();
@@ -144,7 +157,7 @@ HRESULT Character::SpecialCapacityCheck(Character* ennemy)
 
     if (_characterStatus == STUN)
     {
-        logFight <<endl<< _nameCharacter << " is stun. End of his turn";
+        logFight << endl << _nameCharacter << " is stun. End of his turn";
         AddLog(logFight.str());
         return S_FALSE;
     }
@@ -153,7 +166,7 @@ HRESULT Character::SpecialCapacityCheck(Character* ennemy)
     {
         _currentCd = _cdSpecialCapacity;
 
-        EnhancedHresult result= SpecialCapacity(ennemy);
+        EnhancedHresult result = SpecialCapacity(ennemy);
         AddLog(result.getMessage());
 
         if (result.getResult() != E_FAIL)
@@ -163,7 +176,7 @@ HRESULT Character::SpecialCapacityCheck(Character* ennemy)
     }
     else
     {
-        logFight <<endl<< _nameCharacter << " cannot Use Special Capacity : " << _nameCapacity << " this turn. He must wait: " << _currentCd << " turn";
+        logFight << endl << _nameCharacter << " cannot Use Special Capacity : " << _nameCapacity << " this turn. He must wait: " << _currentCd << " turn";
         AddLog(logFight.str());
 
         return S_FALSE;
