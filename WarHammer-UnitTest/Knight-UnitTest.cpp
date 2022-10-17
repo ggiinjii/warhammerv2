@@ -27,11 +27,11 @@ namespace KnightUnitTest
 		{
             Image img;
 			Sword* LunarSword = new Sword(5);
-			Knigth Anduin("Anduin", 20, LunarSword, nullptr, 10, "Pour l'alliance", img);
+			Knigth* Anduin= new Knigth("Anduin", 20, LunarSword, nullptr, 10, "Pour l'alliance", img);
 
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, nullptr, 5, "Stun", img);
 
-			HRESULT result = Anduin.SpecialCapacity(Thrall).getResult();
+			HRESULT result = Anduin->SpecialCapacity(Thrall).getResult();
 
 			if (result==S_OK)
 				Assert::AreEqual(Thrall->GetPv().getPv(), 50);
@@ -39,10 +39,17 @@ namespace KnightUnitTest
 				Assert::AreEqual(Thrall->GetPv().getPv(),60 );
 
             Assert::AreEqual(Thrall->GetPv().getPvMax(), 60);
-            delete LunarSword;
-            LunarSword = nullptr;
+
             delete Thrall;
             Thrall = nullptr;
+
+            delete Anduin;
+            Anduin = nullptr;
+
+            if (LunarSword != nullptr)
+            {
+                LunarSword = nullptr;
+            }
 		}
 	};
 }

@@ -20,10 +20,13 @@ namespace OrcUnitTest
 			Thrall->GetHit(20);
 
 			Assert::AreEqual(Thrall->GetPv().getPv(), 40);
-            delete DoomHammer;
-            DoomHammer = nullptr;
             delete Thrall;
             Thrall = nullptr;
+
+            if (DoomHammer != nullptr)
+            {
+                DoomHammer = nullptr;
+            }
 		}
 
 		TEST_METHOD(isGetHitWithArmorDeal0Pv)
@@ -35,12 +38,17 @@ namespace OrcUnitTest
 			Thrall->GetHit(20);
 
 			Assert::AreEqual(Thrall->GetPv().getPv(), 60);
-            delete DoomHammer;
-            DoomHammer = nullptr;
             delete Thrall;
             Thrall = nullptr;
-            delete shield;
-            shield = nullptr;
+
+            if (shield != nullptr)
+            {
+                shield = nullptr;
+            }
+            if (DoomHammer != nullptr)
+            {
+                DoomHammer = nullptr;
+            }
 		}
 
 

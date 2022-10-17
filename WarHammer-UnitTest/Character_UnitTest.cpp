@@ -81,8 +81,11 @@ namespace CharacterUnitTest
             delete Thrall;
             Thrall = nullptr;
 
-            delete shield;
-            shield = nullptr;
+            if (shield != nullptr)
+            {
+                shield = nullptr;
+            }
+           
 		}
 
 		TEST_METHOD(IsCharacterStillAliveIsTrue)
@@ -178,10 +181,13 @@ namespace CharacterUnitTest
 			Assert::AreEqual(Billy->GetPv().getPv(), 20);
             delete Billy;
             Billy = nullptr;
-            delete orcSword;
-            orcSword = nullptr;
             delete Thrall;
             Thrall = nullptr;
+
+            if (orcSword != nullptr)
+            {
+                orcSword = nullptr;
+            }
 		}
 
 		TEST_METHOD(SpecialCapacityCheckReturnE_Fail)

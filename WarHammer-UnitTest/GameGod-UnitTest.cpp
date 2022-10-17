@@ -25,15 +25,6 @@ namespace GameGodUnitTest
 
 			Assert::AreEqual(Kimimaro.LauchSpecialCapacity(Billy, Thrall),S_OK);
 
-            delete Thrall;
-            Thrall = nullptr;
-            delete MasterSword;
-            MasterSword = nullptr;
-            delete Billy;
-            Billy = nullptr;
-
-
-
 		}
 
 		TEST_METHOD(LauchSpecialCapacityReturnS_FALSE)
@@ -46,12 +37,16 @@ namespace GameGodUnitTest
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, nullptr, 5, "Stun", img);
 
 			Assert::AreEqual(Kimimaro.LauchSpecialCapacity(Billy, Thrall), S_FALSE);
-            delete MasterSword;
-            MasterSword = nullptr;
+
             delete Billy;
             Billy = nullptr;
             delete Thrall;
             Thrall = nullptr;
+
+            if (MasterSword != nullptr)
+            {
+                MasterSword = nullptr;
+            }
 		}
 
 		TEST_METHOD(LauchSpecialCapacityReturnE_Fail)
@@ -80,10 +75,7 @@ namespace GameGodUnitTest
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, nullptr, 5, "Stun", img);
 
 			Assert::AreEqual(Kimimaro.isAWinnerDecided(Billy, Thrall),S_OK);
-            delete Billy;
-            Billy = nullptr;
-            delete Thrall;
-            Thrall = nullptr;
+
 		}
 		
 		TEST_METHOD(isAWinnerDecidedIsFalse)
@@ -110,10 +102,7 @@ namespace GameGodUnitTest
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, nullptr, 5, "Stun", img);
 
 			Assert::AreEqual(Kimimaro.ClassicFight(Billy, Thrall),S_OK);
-            delete Billy;
-            Billy = nullptr;
-            delete Thrall;
-            Thrall = nullptr;
+
 		}
 
 		TEST_METHOD(ClassicFightIsFalse)
@@ -173,8 +162,7 @@ namespace GameGodUnitTest
 			Knigth* Billy = new Knigth("Billy", 20, nullptr, nullptr, 3, "Charge", img);
 			Kimimaro.setWinner(Billy);
 			Assert::AreEqual(Kimimaro.GetWinner()->GetName(), Billy->GetName());
-            delete Billy;
-            Billy = nullptr;
+
 		}
 	};
 }

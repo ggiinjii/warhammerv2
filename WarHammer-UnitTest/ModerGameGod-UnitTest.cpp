@@ -29,11 +29,7 @@ namespace ModernGameGodUnitTest
 			Assert::AreEqual(S_OK,resultFight.getIsExecutionWell() );
 			Assert::AreEqual("Thrall",resultFight.getWinner().c_str() );
 			Assert::AreEqual(1,resultFight.getTurnNumber() );
-			Assert::IsTrue(resultFight.getIsGameOver() );
-            delete Billy;
-            Billy = nullptr;
-            delete Thrall;
-            Thrall = nullptr;
+            Assert::IsTrue(resultFight.getIsGameOver());
 			
 		}
 		
@@ -69,10 +65,6 @@ namespace ModernGameGodUnitTest
 			Assert::AreEqual("Thrall",resultFight.getWinner().c_str());
 			Assert::AreEqual(1,resultFight.getTurnNumber() );
 			Assert::IsTrue(resultFight.getIsGameOver() );
-            delete Billy;
-            Billy = nullptr;
-            delete Thrall;
-            Thrall = nullptr;
 			
 		}
 		
@@ -119,10 +111,6 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.LauchSpecialCapacity( Billy, Thrall);
 			
 			Assert::AreEqual(S_OK,resultFight );
-            delete Billy;
-            Billy = nullptr;
-            delete Thrall;
-            Thrall = nullptr;
 			
 		}
 		
@@ -174,11 +162,6 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.isAWinnerDecided( Billy, Thrall);
 			
 			Assert::AreEqual(S_OK,resultFight );
-
-            delete Billy;
-            Billy = nullptr;
-            delete Thrall;
-            Thrall = nullptr;
 		}
 	
 		TEST_METHOD(isAWinnerDecidedReturnE_Fail)
@@ -207,11 +190,6 @@ namespace ModernGameGodUnitTest
 			HRESULT resultFight=Kimimaro.ClassicFight( Billy, Thrall);
 			
 			Assert::AreEqual(S_OK,resultFight );
-
-            delete Billy;
-            Billy = nullptr;
-            delete Thrall;
-            Thrall = nullptr;
 		}
 		
 				TEST_METHOD(ClassicFightReturnS_False)
