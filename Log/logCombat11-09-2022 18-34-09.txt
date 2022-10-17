@@ -1,1 +1,0 @@
-﻿2022-09-11 18:34:09.824 ERROR [30372] [GameGod::LoadCharacterRessources@35] Parsing of Json Failed. Filename: /Ressources/Orc.json

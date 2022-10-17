@@ -32,7 +32,10 @@ WarHammer-UnitTest/x64/
 /Log*/
 
 ## Log Result
-Log/*
+Log/
+
+## Unit Test Result
+TestResults/
 
 ## Xcode artifacts
 project.xcworkspace
