@@ -46,9 +46,9 @@ public:
 
 	Character* GetWinner();
 
-	void setWinner(Character* winner);
+	void SetWinner(Character* winner);
 
-	HRESULT isAWinnerDecided(Character* allianceFighter, Character* hordeFighter);
+	HRESULT IsAWinnerDecided(Character* allianceFighter, Character* hordeFighter);
 
 	void SetOpponent(Character* allianceFighter, Character* hordeFighter);
 	void CheckStatusEffectForPlayers(Character* allianceFighter, Character* hordeFighter);
@@ -59,7 +59,7 @@ public:
     HRESULT NextTurn(Character* allianceFighter, Character* hordeFighter);
 	
 	void AddTurnInfo(string info);
-	void resetTurnInfo();
+	void ResetTurnInfo();
 
 	void RetroPlay();
 

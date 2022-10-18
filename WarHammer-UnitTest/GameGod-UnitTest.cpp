@@ -74,7 +74,7 @@ namespace GameGodUnitTest
 			Knigth* Billy = new Knigth("Billy", 0, nullptr, nullptr, 3, "Charge", img);
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, nullptr, 5, "Stun", img);
 
-			Assert::AreEqual(Kimimaro.isAWinnerDecided(Billy, Thrall),S_OK);
+			Assert::AreEqual(Kimimaro.IsAWinnerDecided(Billy, Thrall),S_OK);
 
 		}
 		
@@ -86,7 +86,7 @@ namespace GameGodUnitTest
 			Knigth* Billy = new Knigth("Billy", 20, nullptr, nullptr, 3, "Charge", img);
 			Orc* Thrall = new Orc("Thrall", 60, nullptr, nullptr, 5, "Stun", img);
 
-			Assert::AreEqual(Kimimaro.isAWinnerDecided(Billy, Thrall),S_FALSE);
+			Assert::AreEqual(Kimimaro.IsAWinnerDecided(Billy, Thrall),S_FALSE);
             delete Billy;
             Billy = nullptr;
             delete Thrall;
@@ -160,7 +160,7 @@ namespace GameGodUnitTest
 			GameGod Kimimaro;
 
 			Knigth* Billy = new Knigth("Billy", 20, nullptr, nullptr, 3, "Charge", img);
-			Kimimaro.setWinner(Billy);
+			Kimimaro.SetWinner(Billy);
 			Assert::AreEqual(Kimimaro.GetWinner()->GetName(), Billy->GetName());
 
 		}

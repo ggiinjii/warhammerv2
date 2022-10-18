@@ -232,7 +232,7 @@ HRESULT GameGod::LauchSpecialCapacity(Character* allianceFighter, Character* hor
     }
 
 
-    HRESULT isAPlayerDead = isAWinnerDecided(allianceFighter, hordeFighter);
+    HRESULT isAPlayerDead = IsAWinnerDecided(allianceFighter, hordeFighter);
 
     if (isAPlayerDead == S_FALSE)
     {
@@ -246,27 +246,26 @@ HRESULT GameGod::LauchSpecialCapacity(Character* allianceFighter, Character* hor
             AddTurnInfo(i);
         }
 
-        isAPlayerDead = isAWinnerDecided(allianceFighter, hordeFighter);
+        isAPlayerDead = IsAWinnerDecided(allianceFighter, hordeFighter);
     }
 
     allianceFighter->ClearLog();
     hordeFighter->ClearLog();
 
     return isAPlayerDead;
-
 }
 
 
-HRESULT GameGod::isAWinnerDecided(Character* allianceFighter, Character* hordeFighter)
+HRESULT GameGod::IsAWinnerDecided(Character* allianceFighter, Character* hordeFighter)
 {
     if (!allianceFighter->IsCharacterStillAlive())
     {
-        setWinner(hordeFighter);
+        SetWinner(hordeFighter);
         return S_OK;
     }
     else if (!hordeFighter->IsCharacterStillAlive())
     {
-        setWinner(allianceFighter);
+        SetWinner(allianceFighter);
         return S_OK;
     }
     else
@@ -286,7 +285,7 @@ HRESULT GameGod::ClassicFight(Character* allianceFighter, Character* hordeFighte
     }
 
 
-    if (isAWinnerDecided(allianceFighter, hordeFighter) == S_FALSE)
+    if (IsAWinnerDecided(allianceFighter, hordeFighter) == S_FALSE)
     {
         AddTurnInfo("\nCharacter " + hordeFighter->GetName() + " Attack normaly");
 
@@ -302,7 +301,7 @@ HRESULT GameGod::ClassicFight(Character* allianceFighter, Character* hordeFighte
     allianceFighter->ClearLog();
     hordeFighter->ClearLog();
 
-    return isAWinnerDecided(allianceFighter, hordeFighter);
+    return IsAWinnerDecided(allianceFighter, hordeFighter);
 }
 
 void GameGod::CheckStatusEffectForPlayers(Character* allianceFighter, Character* hordeFighter)
@@ -311,7 +310,6 @@ void GameGod::CheckStatusEffectForPlayers(Character* allianceFighter, Character*
     CheckStatusEffect(hordeFighter);
 
 }
-
 
 void GameGod::CheckStatusEffect(Character* allianceFighter)
 {
@@ -322,7 +320,9 @@ void GameGod::CheckStatusEffect(Character* allianceFighter)
         AddTurnInfo("Character " + allianceFighter->GetName() + " Cured from STUN");
         break;
 
-    case BURN: //TODO
+    case BURN:
+        allianceFighter->GetHit(2); // In case of Burn, Fighter Loose 2 HP per Turn
+        break;
 
     case FROZEN: //TODO
 
@@ -365,7 +365,7 @@ void GameGod::StartModernBattle(Character* allianceFighter, Character* hordeFigh
 HRESULT GameGod::NextTurn(Character* allianceFighter, Character* hordeFighter)
 {
 
-    resetTurnInfo();
+    ResetTurnInfo();
 
     _turnCount = _turnCount + 1;
     PLOG_INFO << "Turn No" << _turnCount;
@@ -399,14 +399,13 @@ HRESULT GameGod::NextTurn(Character* allianceFighter, Character* hordeFighter)
     return _isGameOver;
 }
 
-
 void GameGod::AddTurnInfo(string info)
 {
     PLOG_INFO << info;
     _retroUI.AddTurnInfo(info);
 }
 
-void GameGod::resetTurnInfo()
+void GameGod::ResetTurnInfo()
 {
     _retroUI.ResetTurnInfo();
 }
@@ -447,7 +446,7 @@ void GameGod::RetroPlay()
 
     StartRetroBattle(AllianceFighter, HordeFighter);
 
-    resetTurnInfo();
+    ResetTurnInfo();
     AddTurnInfo("The Game is Over.");
     AddTurnInfo("The Winner is " + GetWinner()->GetName());
 
@@ -494,15 +493,13 @@ int GameGod::SecureCinInput(int maxNumber)
     return inputFighter;
 }
 
-
-
 void GameGod::SetOpponent(Character* allianceFighters, Character* hordeFighters)
 {
     _allianceFighter = allianceFighters;
     _hordeFighter = hordeFighters;
 }
 
-void GameGod::setWinner(Character* winner)
+void GameGod::SetWinner(Character* winner)
 {
     PLOG_INFO << "We have allianceFighter winner ";
 
