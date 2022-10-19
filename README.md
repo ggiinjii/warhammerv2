@@ -5,7 +5,7 @@ AUBERT ROMAIN -
 aubertromainpro@gmail.com
 
 Bonjour,
-Voici le projet WarHammer que j'ai développé dans le cadre de ma candidature pour l'entreprise Eugen System.
+Voici le projet WarHammer développé dans le cadre d'une précédente candidature pour un poste de développeur.
 
 Pour rappel, voici la problématique :
 
@@ -93,8 +93,9 @@ Cela necessiterai un ajout a la lecture du Json, une modification de ce dernier 
 **Les Armes**
 
 L'architecture logicielle des armes est la même que celle des Personnages Combattant.
-Deux classe mere Armor et Weapon sont les classe hérité de toutes les armes que l'ont voudra créer.
-Cela permet également une grande souplesse dans l'ajout d'arme différentes.
+Deux classe mère Armor et Weapon sont les classe hérité de toutes les armes que l'ont voudra créer.
+Cela permet également une grande souplesse dans l'ajout d'arme différentes mais également dans la personnalisation des armes.
+Pour le moment aucun comportement supplémentaire n'a été ajoutée dans les classes Shield et Sword mais nous pouvons imaginer l'ajout de compétences supplémentaires sur ces objets comme l'illustre la classe MirrorArmor. 
 
 **Préparation du combat**
 
@@ -125,9 +126,9 @@ Si un personnage est mort durant l'une des phase, le combat s'arrete et le nom d
 ## Evolution possible
 **Projet**
 
-Monitoring avec SonarScanner
+Monitoring avec SonarScanner (Nécéssite une licence payante dont mit de coté pour le moment)
 Evolution vers des version plus récente d'OpenGl
-Ajout d'un job de Package a la Ci
+Ajout d'un job de Package à la Ci
 
 **Jeux**
 
@@ -136,4 +137,4 @@ Animation du combat en temps réel
 Ajout de son ambiant
 Ajout de combat multiple ( Duo, Trio Armée Vs Armée)
 Décorélation des personnages et de l'équipement afin que l'utilisateur puisse créer un personnage de bout en bout et ne plus jouer d'archetypes.
-Ajout de différentes condition ( Burn, Frozen, etc)
+Ajout de différentes condition (Burn, Frozen, etc)
